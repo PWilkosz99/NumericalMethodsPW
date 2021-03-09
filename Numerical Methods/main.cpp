@@ -24,7 +24,6 @@ int main() {
 			break;		
 		case 2:
 			//interpolacja
-			///fwafwafwafwa
 			break;
 		default:
 			break;

@@ -15,12 +15,12 @@ double Horner(int n, double w[], double p) {
 //x - wartosc punktu
 
 void HornerFromMain() {
-	cout << "\nPodaj wielkosc wielomianu\n";
+	cout << "\nPodaj stopien wielomianu\n";
 	int n = 0;
 	cin >> n;
 	double* w = new double[n];
 	for (int i = 0; i < n; i++) {
-		cout << "Podaj wartoœæ przy x^" << i << "\n";
+		cout << "Podaj wartosc przy x^" << i << "\n";
 		cin >> w[i];
 	}
 	cout << "Dla jakiego x policzyc?";
