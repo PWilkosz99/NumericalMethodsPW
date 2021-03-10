@@ -146,6 +146,12 @@
   <ItemGroup>
     <ClInclude Include="headers.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\polynomial-1-v2.csv" />
+    <None Include="data\polynomial-2-v2.csv" />
+    <None Include="data\polynomial-3-v2.csv" />
+    <None Include="data\polynomial-4-v2.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,5 +1,12 @@
 #include "headers.h"
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <utility> // std::pair
+#include <stdexcept> // std::runtime_error
+#include <sstream> // std::stringstream
+#include <vector>
 using namespace std;
 
 double Horner(int n, double w[], double p) {
@@ -10,9 +17,9 @@ double Horner(int n, double w[], double p) {
 	return y;
 }
 
-//n - ilosc elemetnow w tablicy
+//n - stopien wspolczynnikow
 //w - tablica wartoœci przed x
-//x - wartosc punktu
+//p - wartosc punktu
 
 void HornerFromMain() {
 	cout << "\nPodaj stopien wielomianu\n";
@@ -27,4 +34,31 @@ void HornerFromMain() {
 	int x = 0;
 	cin >> x;
 	cout << "Wynik to: " << Horner(n, w, x) << "\n";
+}
+
+
+//csv: 1 - liczba wspolczynnikow, 2-11 wyrazy
+//x ma byc -0.5
+void HornerTest() {
+	ifstream data("polynomial-1-v2.csv");
+	vector<double> row;
+	string line;
+	if (data.good()) {
+		while (!data.eof()) {
+			row.clear();
+			getline(data, line, ';');
+			if (line != "") {
+				row.push_back(stod(line));
+			}
+		}
+	}
+}
+
+//b - wartosci bi
+double Horner_uog(int n, double b[], double x[],double p) {
+	double y = b[n - 1];
+	for (int i = n - 2; i >= 0; i--) {
+		y = y + (p - x[i]) + b[i];
+	}
+	return y;
 }
