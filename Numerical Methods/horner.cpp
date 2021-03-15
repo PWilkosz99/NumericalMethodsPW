@@ -79,3 +79,12 @@ void HornerUOGFromMain() {
 	cin >> x;
 	cout << "Wynik to: " << HornerUOG(n, b, w, x) << "\n";
 }
+
+void HornerUOGTest() {
+	double x_u[] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 0.8, 0.9, 1 };
+	double a_i[] = { -1, 2, 5, -2, 4, -0.5, 8, -1, 0.01, 0.03 };
+	int n = 10;
+	double x = -0.5;
+	cout << "Wynik dla danych polynomial-2-v2.csv:\n";
+	cout << HornerUOG(n, a_i, x_u, x);
+}

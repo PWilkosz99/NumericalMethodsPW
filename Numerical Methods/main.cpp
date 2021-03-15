@@ -45,6 +45,7 @@ int main() {
 		}
 	} while (choice != 0);
 
+	HornerUOGTest();
 
 	return 0;
 }

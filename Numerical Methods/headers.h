@@ -7,3 +7,4 @@ void HornerTest();
 
 double HornerUOG(int n, double b[], double x[], double p);
 void HornerUOGFromMain();
+void HornerUOGTest();
