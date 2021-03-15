@@ -1,9 +1,12 @@
 #include <iostream>
 #include "headers.h"
+#include <locale.h>
 
 using namespace std;
 
 int main() {
+	setlocale(LC_CTYPE, "Polish");
+
 	short choice = -1;
 	short choice2 = -1;
 	do
@@ -23,7 +26,7 @@ int main() {
 		case 1:
 			cout << "Menu programu\n" <<
 				"1 - Schemat Hornera\n" <<
-				"2 - Uogolniony schemat Hornera\n";
+				"2 - Uogólnony schemat Hornera\n";
 			cin >> choice2;
 			switch (choice2) 
 			{
