@@ -52,10 +52,30 @@ void HornerTest() {
 }
 
 //b - wartosci bi
-double Horner_uog(int n, double b[], double x[], double p) {
+double HornerUOG(int n, double b[], double x[], double p) {
 	double y = b[n - 1];
 	for (int i = n - 2; i >= 0; i--) {
 		y = y + (p - x[i]) + b[i];
 	}
 	return y;
+}
+
+void HornerUOGFromMain() {
+	cout << "\nPodaj stopien wielomianu\n";
+	int n = 0;
+	cin >> n;
+	double* w = new double[n];
+	double* b = new double[n];
+	for (int i = 0; i < n; i++) {
+		cout << "Podaj wartosc przy x^" << i << "\n";
+		cin >> w[i];
+	}
+	for (int i = 0; i < n; i++) {
+		cout << "Podaj wartosc przy wspó³czynnika b dla " << i << " stopnia\n";
+		cin >> b[i];
+	}
+	cout << "Dla jakiego x policzyc?";
+	int x = 0;
+	cin >> x;
+	cout << "Wynik to: " << HornerUOG(n, b, w, x) << "\n";
 }
