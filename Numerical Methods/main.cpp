@@ -67,7 +67,10 @@ int main() {
 		}
 	} while (choice != 0);
 
-	HornerUOGTest();
+	double x[] = { 1,2,3,4 };
+	double y[] = { 2,5,3,1 };
+
+	cout<<LagrangeInterpolation(4, x, y, 5);
 
 	return 0;
 }
