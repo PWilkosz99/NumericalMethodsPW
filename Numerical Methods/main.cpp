@@ -13,7 +13,7 @@ int main() {
 	do
 	{
 		cout << "Menu programu\n" <<
-			"0 - wyjscie\n" <<
+			"0 - Wyjscie\n" <<
 			"1 - Horner\n" <<
 			"2 - Interpolacja\n" <<
 			"9 - Testy\n";
@@ -63,7 +63,8 @@ int main() {
 		case 9:
 			cout << "Menu testów\n" <<
 				"1 - Schemat Hornera\n" <<
-				"2 - Uogólnony schemat Hornera\n";
+				"2 - Uogólnony schemat Hornera\n" <<
+				"3 - Interpolacja Langrangea\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -74,7 +75,7 @@ int main() {
 				HornerUOGTest();
 				break;
 			case 3:
-				///
+				LagrangeInteprolationTest();
 				break;
 			default:
 				break;

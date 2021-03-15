@@ -43,3 +43,21 @@ void LagrangeInterpolationFromMain() {
 	cin >> p;
 	cout << "Wynik to: " << LagrangeInterpolation(n, x, y, p) << "\n";
 }
+
+void LagrangeInteprolationTest() {
+	double x_i[] = { -2, -1, 0, 1, 2 };
+	double y_i[] = { 5 ,-2, 4, -7, 2 };
+	int n = 5;
+	double p = -0.5;
+
+	cout << "Wynik dla danych polynomial-3-v2.csv:\n";
+	cout << LagrangeInterpolation(n, x_i, y_i, p) << "\n\n";
+}
+//
+//5;
+//x_i; y_i
+//- 2; 5
+//- 1; -2
+//0; 4
+//1; -7
+//2; 2

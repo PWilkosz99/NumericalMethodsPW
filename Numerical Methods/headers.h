@@ -12,3 +12,4 @@ void HornerUOGTest();
 double CalculateLi(int n, int i, double x[], double p);
 double LagrangeInterpolation(int n, double x[], double y[], double p);
 void LagrangeInterpolationFromMain();
+void LagrangeInteprolationTest();
