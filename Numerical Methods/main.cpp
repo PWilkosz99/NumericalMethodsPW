@@ -9,7 +9,7 @@ int main() {
 
 	short choice = -1;
 	short choice2 = -1;
-	short choice3 = -1;
+	//short choice3 = -1;
 	do
 	{
 		cout << "Menu programu\n" <<
@@ -43,20 +43,38 @@ int main() {
 			}
 			break;		
 		case 2:
-			//interpolacja
+			cout << "Menu programu\n" <<
+				"1 - Interpolacja Lagrangea\n" <<
+				"2 - TODO\n";
+			cin >> choice2;
+			switch (choice2)
+			{
+			case 1:
+				LagrangeInterpolationFromMain();
+				break;
+			case 2:
+				//TODO
+				break;
+			default:
+				break;
+			}
+			break;
 			break;
 		case 9:
 			cout << "Menu testów\n" <<
 				"1 - Schemat Hornera\n" <<
 				"2 - Uogólnony schemat Hornera\n";
-			cin >> choice3;
-			switch (choice3)
+			cin >> choice2;
+			switch (choice2)
 			{
 			case 1:
 				HornerTest();
 				break;
 			case 2:
 				HornerUOGTest();
+				break;
+			case 3:
+				///
 				break;
 			default:
 				break;
