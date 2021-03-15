@@ -9,12 +9,14 @@ int main() {
 
 	short choice = -1;
 	short choice2 = -1;
+	short choice3 = -1;
 	do
 	{
 		cout << "Menu programu\n" <<
 			"0 - wyjscie\n" <<
 			"1 - Horner\n" <<
-			"2 - Interpolacja\n";
+			"2 - Interpolacja\n" <<
+			"9 - Testy\n";
 		cin >> choice;
 		if (!cin.good())
 			choice = 0;
@@ -42,6 +44,23 @@ int main() {
 			break;		
 		case 2:
 			//interpolacja
+			break;
+		case 9:
+			cout << "Menu testów\n" <<
+				"1 - Schemat Hornera\n" <<
+				"2 - Uogólnony schemat Hornera\n";
+			cin >> choice3;
+			switch (choice3)
+			{
+			case 1:
+				HornerTest();
+				break;
+			case 2:
+				HornerUOGTest();
+				break;
+			default:
+				break;
+			}
 			break;
 		default:
 			break;

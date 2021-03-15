@@ -42,12 +42,13 @@ void HornerTest() {
 	int n2 = 10;
 	int n3 = 5;
 	double x = -0.5;
+	cout << "Wynik dla danych polynomial-1-v2.csv:\n";
 	cout << "Przyklad 1:";
 	cout << Horner(n1, w1, x);
 	cout << "\nPrzyklad 2:";
 	cout << Horner(n2, w2, x);
 	cout << "\nPrzyklad 3:";
-	cout << Horner(n3, w3, x);
+	cout << Horner(n3, w3, x) << "\n\n";
 
 }
 
@@ -86,5 +87,5 @@ void HornerUOGTest() {
 	int n = 10;
 	double x = -0.5;
 	cout << "Wynik dla danych polynomial-2-v2.csv:\n";
-	cout << HornerUOG(n, a_i, x_u, x);
+	cout << HornerUOG(n, a_i, x_u, x) << "\n\n";
 }
