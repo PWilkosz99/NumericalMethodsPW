@@ -2,11 +2,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <vector>
-#include <utility> // std::pair
-#include <stdexcept> // std::runtime_error
-#include <sstream> // std::stringstream
-#include <vector>
 using namespace std;
 
 double Horner(int n, double w[], double p) {
@@ -40,22 +35,24 @@ void HornerFromMain() {
 //csv: 1 - liczba wspolczynnikow, 2-11 wyrazy
 //x ma byc -0.5
 void HornerTest() {
-	ifstream data("polynomial-1-v2.csv");
-	vector<double> row;
-	string line;
-	if (data.good()) {
-		while (!data.eof()) {
-			row.clear();
-			getline(data, line, ';');
-			if (line != "") {
-				row.push_back(stod(line));
-			}
-		}
-	}
+	double w1[] = { -1, -0.8, -0.4, -0.2, -0.1, 0, 0.4, 0.5, 0.8, 1 };
+	double w2[] = { -1, 2, 5, -2, 4, -0.5, 8, -1, 0.01, 0.03 };
+	double w3[] = { -1, 2, 4, -5, -0.1 };
+	int n1 = 10;
+	int n2 = 10;
+	int n3 = 5;
+	double x = -0.5;
+	cout << "Przyklad 1:";
+	cout << Horner(n1, w1, x);
+	cout << "\nPrzyklad 2:";
+	cout << Horner(n2, w2, x);
+	cout << "\nPrzyklad 3:";
+	cout << Horner(n3, w3, x);
+
 }
 
 //b - wartosci bi
-double Horner_uog(int n, double b[], double x[],double p) {
+double Horner_uog(int n, double b[], double x[], double p) {
 	double y = b[n - 1];
 	for (int i = n - 2; i >= 0; i--) {
 		y = y + (p - x[i]) + b[i];
