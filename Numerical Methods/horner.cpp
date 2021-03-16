@@ -4,6 +4,8 @@
 #include <fstream>
 using namespace std;
 
+// [LAB 1|2 ZAD 1]
+
 double Horner(int n, double w[], double p) {
 	double y = w[n - 1];
 	for (int i = n - 2; i >= 0; i--) {
@@ -32,6 +34,7 @@ void HornerFromMain() {
 }
 
 
+
 //csv: 1 - liczba wspolczynnikow, 2-11 wyrazy
 //x ma byc -0.5
 void HornerTest() {
@@ -51,6 +54,8 @@ void HornerTest() {
 	cout << Horner(n3, w3, x) << "\n\n";
 
 }
+
+// [LAB 1|2 ZAD 2]
 
 //b - wartosci bi
 double HornerUOG(int n, double b[], double x[], double p) {

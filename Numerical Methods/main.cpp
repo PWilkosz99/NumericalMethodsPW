@@ -30,7 +30,7 @@ int main() {
 				"1 - Schemat Hornera\n" <<
 				"2 - Uogólnony schemat Hornera\n";
 			cin >> choice2;
-			switch (choice2) 
+			switch (choice2)
 			{
 			case 1:
 				HornerFromMain();
@@ -41,11 +41,11 @@ int main() {
 			default:
 				break;
 			}
-			break;		
+			break;
 		case 2:
 			cout << "Menu programu\n" <<
 				"1 - Interpolacja Lagrangea\n" <<
-				"2 - TODO\n";
+				"2 - Ilorazy ró¿nicowe(b_k)\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -53,7 +53,7 @@ int main() {
 				LagrangeInterpolationFromMain();
 				break;
 			case 2:
-				//TODO
+				CalculateBKFromMain();
 				break;
 			default:
 				break;
@@ -64,7 +64,8 @@ int main() {
 			cout << "Menu testów\n" <<
 				"1 - Schemat Hornera\n" <<
 				"2 - Uogólnony schemat Hornera\n" <<
-				"3 - Interpolacja Langrangea\n";
+				"3 - Interpolacja Langrangea\n" <<
+				"4 - Ilorazy ró¿nicowe\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -77,6 +78,9 @@ int main() {
 			case 3:
 				LagrangeInteprolationTest();
 				break;
+			case 4:
+				CalculateBKTest();
+				break;
 			default:
 				break;
 			}
@@ -85,11 +89,6 @@ int main() {
 			break;
 		}
 	} while (choice != 0);
-
-	double x[] = { 1,2,3,4 };
-	double y[] = { 2,5,3,1 };
-
-	cout<<LagrangeInterpolation(4, x, y, 5);
 
 	return 0;
 }
