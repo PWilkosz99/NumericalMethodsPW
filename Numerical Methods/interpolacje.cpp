@@ -25,7 +25,7 @@ double LagrangeInterpolation(int n, double x[], double y[], double p) {
 	double result = 0;
 	for (int i = 0; i < n; i++)
 	{
-		result += CalculateLi(n, i, x, p) + y[i];
+		result += CalculateLi(n, i, x, p) * y[i];
 	}
 	return result;
 }
@@ -43,7 +43,7 @@ void LagrangeInterpolationFromMain() {
 		cin >> y[i];
 	}
 	cout << "Dla jakiego punktu policzyc?";
-	int p = 0;
+	double p = 0;
 	cin >> p;
 	cout << "Wynik to: " << LagrangeInterpolation(n, x, y, p) << "\n";
 }
