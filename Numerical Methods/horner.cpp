@@ -84,11 +84,11 @@ void HornerUOGFromMain() {
 	double* w = new double[n];
 	double* b = new double[n];
 	for (int i = 0; i < n; i++) {
-		cout << "Podaj wartosc przy x_" << i << "\n";
+		cout << "Podaj wartosc przy x_" << n-i << "\n";
 		cin >> w[i];
 	}
 	for (int i = 0; i < n; i++) {
-		cout << "Podaj wartosc przy wspó³czynnika b dla " << i << " stopnia\n";
+		cout << "Podaj wartosc przy wspó³czynnika b dla " << n-i << " stopnia\n";
 		cin >> b[i];
 	}
 	cout << "Dla jakiego x policzyc?";

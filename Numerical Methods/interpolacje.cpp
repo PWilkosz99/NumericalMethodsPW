@@ -8,11 +8,11 @@ using namespace std;
 /// <summary>
 /// [LAB 1|2 ZAD 3]
 /// </summary>
-/// <param name="n"></param>
-/// <param name="i"></param>
-/// <param name="x"></param>
-/// <param name="p"></param>
-/// <returns></returns>
+/// <param name="n">Ilosc punktow</param>
+/// <param name="i">Wspó³czynnik i przy L</param>
+/// <param name="x">Wspolrzedne x punktow</param>
+/// <param name="p">Interpolowany punkt</param>
+/// <returns>Wartoœæ Li dla podanego i</returns>
 double CalculateLi(int n, int i, double x[], double p) {
 
 	double li = 1.0;
@@ -30,11 +30,11 @@ double CalculateLi(int n, int i, double x[], double p) {
 /// <summary>
 /// [LAB 1|2 ZAD 4]
 /// </summary>
-/// <param name="n"></param>
-/// <param name="x"></param>
-/// <param name="y"></param>
-/// <param name="p"></param>
-/// <returns></returns>
+/// <param name="n">Ilosc punktow</param>
+/// <param name="x">Wspolrzedne x punktow</param>
+/// <param name="y">Wspolrzedne y punktow</param>
+/// <param name="p">Interpolowany punkt</param>
+/// <returns>Wartosc funkcji w punkcie p</returns>
 double LagrangeInterpolation(int n, double x[], double y[], double p) {
 	double result = 0.0;
 	for (int i = 0; i < n; i++)
@@ -44,6 +44,9 @@ double LagrangeInterpolation(int n, double x[], double y[], double p) {
 	return result;
 }
 
+/// <summary>
+/// UI dla Interpolacji Lagrangea
+/// </summary>
 void LagrangeInterpolationFromMain() {
 	cout << "\nPodaj stopien wielomianu\n";
 	int n = 0;
@@ -76,34 +79,38 @@ void LagrangeInteprolationTest() {
 }
 
 /// <summary>
+/// [LAB 1|2 ZAD 5]
 /// Obliczanie ilorazów ró¿nicowych
 /// </summary>
 /// <param name="n">iloœæ parametrów</param>
 /// <param name="x">xi</param>
 /// <param name="y">yi</param>
-/// <returns>Tablica paramerow b_k</returns>
+/// <returns>Tablica wpó³czynników b_k</returns>
 double* CalculateBK(int n, double x[], double y[]) {
 
 	double** M = new double* [n]; //macierz 3d
+	double* b = new double[n]; //wsp bk
 	for (int i = 0; i < n; i++)
 	{
 		M[i] = new double[i + 1];//trojkatna
-		M[i][0] = y[i];
+		M[i][0] = y[i];//koluna 0 
 	}
 
-	for (int i = 1; i < n; i++) {//obieg po przekatniej
-		for (int j = 1; j < i; j++) {
+	for (int i = 1; i < n; i++) {
+		for (int j = 1; j <= i; j++) {
 			M[i][j] = (M[i][j - 1] - M[i - 1][j - 1]) / (x[i] - x[i - j]);
 		}
 	}
 
-	double* b = new double[n];
 	for (int i = 0; i < n; i++) {
 		b[i] = M[i][i]; //przekatna macierzy
 	}
 	return b;
 }
 
+/// <summary>
+/// UI dla obliczania BK
+/// </summary>
 void CalculateBKFromMain() {
 	int n;
 	cout << "Podaj ilosc punktów: ";
@@ -175,25 +182,53 @@ void CalculateBKTest() {
 }
 
 /// <summary>
-/// Zamiana wspó³cznynników postaci Newtnoa na postaæ naturaln¹
+/// Zamiana wspó³cznynników postaci Newtona na postaæ naturaln¹
 /// </summary>
 /// <param name="n">Iloœæ parametrów</param>
 /// <param name="b">Wspó³czynniki bk postaci Newtona</param>
-/// <param name="x"></param>
-/// <returns></returns>
-double* BKToNaturalForm(int n, double b[], double x[]){
+/// <param name="x">Punkty x</param>
+/// <returns>Tablica wspó³czynników w postaci naturalnej</returns>
+double* BKToNaturalForm(int n, double b[], double x[]) {
 	double* nat = new double[n];
 	nat[n - 1] = b[n - 1];
 	for (int i = n - 2; i >= 0; i--) {
 		nat[i] = b[i];
 		for (int j = i; j < n - 1; j++) {
-			nat[j] -= x[j] * nat[j] + 1;
+			nat[j] = nat[j] -  (x[j] * nat[j + 1]);
 		}
 	}
 	return nat;
 }
 
+/// <summary>
+/// UI dla zamiany wspó³cznynników postaci Newtnoa na postaæ naturaln¹
+/// </summary>
+void BkToNaturalFormFromMain() {
+	int n;
+	cout << "Podaj ilosc punktów: ";
+	cin >> n;
+	double* x = new double[n];
+	double* y = new double[n];
+	for (int i = 0; i < n; i++) {
+		cout << "Podaj wartosc " << i << "x: \n";
+		cin >> x[i];
+		cout << "Podaj wartosc " << i << "y: \n";
+		cin >> y[i];
+	}
+	double* bk = new double[n];
+	bk = CalculateBK(n, x, y);
+	double* nat = new double[n];
+	nat = BKToNaturalForm(n, bk, x);
+	cout << "Wspó³czynniki w postaci naturalnej:\n";
+	for (int i = 0; i < n; i++)
+	{
+		cout << nat[i] << "\n";
+	}
+}
 
+/// <summary>
+/// Testy zamiany wspó³cznynników postaci Newtnoa na postaæ naturaln¹ z pliku csv
+/// </summary>
 void BKToNaturalFormTest() {
 
 	cout << "Wynik dla danych polynomial-4-v2.csv:\n";
@@ -218,10 +253,12 @@ void BKToNaturalFormTest() {
 	int n2 = 6;
 	double* bk2 = new double[n2];
 	bk2 = CalculateBK(n2, x_i2, y_i2);
+	double* nat2 = new double[n2];
+	nat2 = BKToNaturalForm(n2, bk2, x_i2);
 	cout << "Dane 2:\n";
 	for (int i = 0; i < n2; i++)
 	{
-		cout << bk2[i] << "\n";
+		cout << nat2[i] << "\n";
 	}
 	cout << "\n\n";
 
@@ -233,10 +270,12 @@ void BKToNaturalFormTest() {
 	int n4 = 4;
 	double* bk4 = new double[n4];
 	bk4 = CalculateBK(n4, x_i4, y_i4);
+	double* nat4 = new double[n4];
+	nat4 = BKToNaturalForm(n4, bk4, x_i4);
 	cout << "Dane 4:\n";
 	for (int i = 0; i < n4; i++)
 	{
-		cout << bk4[i] << "\n";
+		cout << nat4[i] << "\n";
 	}
 	cout << "\n\n";
 }

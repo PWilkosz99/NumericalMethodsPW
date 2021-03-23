@@ -16,9 +16,10 @@ void LagrangeInterpolationFromMain();
 void LagrangeInteprolationTest();
 
 double* CalculateBK(int n, double x[], double y[]);
-//double* CalculateBK(int n, double x[], double y[]);
+//void CalculateBK(int n, double x[], double y[]);
 void CalculateBKFromMain();
 void CalculateBKTest();
 
 double* BKToNaturalForm(int n, double b[], double x[]);
 void BKToNaturalFormTest();
+void BkToNaturalFormFromMain();

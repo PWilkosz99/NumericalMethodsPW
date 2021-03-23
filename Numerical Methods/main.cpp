@@ -9,7 +9,6 @@ int main() {
 
 	short choice = -1;
 	short choice2 = -1;
-	//short choice3 = -1;
 	do
 	{
 		cout << "Menu programu\n" <<
@@ -45,7 +44,8 @@ int main() {
 		case 2:
 			cout << "Menu programu\n" <<
 				"1 - Interpolacja Lagrangea\n" <<
-				"2 - Ilorazy ró¿nicowe(b_k)\n";
+				"2 - Ilorazy ró¿nicowe(b_k)\n" <<
+				"3 - Postaæ naturalna z postaci Newtona\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -53,7 +53,10 @@ int main() {
 				LagrangeInterpolationFromMain();
 				break;
 			case 2:
-				//CalculateBKFromMain();
+				CalculateBKFromMain();
+				break;
+			case 3:
+				BkToNaturalFormFromMain();
 				break;
 			default:
 				break;
@@ -65,8 +68,9 @@ int main() {
 				"1 - Schemat Hornera\n" <<
 				"2 - Uogólnony schemat Hornera\n" <<
 				"3 - Interpolacja Langrangea\n" <<
-				"4 - Ilorazy ró¿nicowe\n"<<
-				"5 - Ilorazy ró¿nicowe postaci Newtona na postaæ naturaln¹\n";
+				"4 - Ilorazy ró¿nicowe\n" <<
+				"5 - Ilorazy ró¿nicowe postaci Newtona na postaæ naturaln¹\n" <<
+				"91 - Laboratoria 1-2\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -83,6 +87,19 @@ int main() {
 				CalculateBKTest();
 				break;
 			case 5:
+				BKToNaturalFormTest();
+				break;
+			case 91:
+				cout << "Wyniki dla danych z pliku csv:\n";
+				cout << "\nZad 1 Obliczanie wartoœci wielomianu zadanego w postaci naturalnej dla dowolnej wartoœci x z wykorzystaniem schematu Hornera\n";
+				HornerTest();
+				cout << "\nZad 2 Obliczanie wartoœci wielomianu zadanego w postaci Newtona dla dowolnej wartoœci x z wykorzystaniem uogólnionego schematu Hornera\n";
+				HornerUOGTest();
+				cout << "\nZad 3 Przekszta³cenie wielomianu z postaci Newtona na postaæ naturaln¹(przeliczenie wspó³czynników)\n";
+				LagrangeInteprolationTest();
+				cout << "\nZad 4 Interpolacja Lagrange’a\n";
+				CalculateBKTest();
+				cout << "\nZad 5 Postaæ Newtona wielomianu Lagrange’a - wyznaczanie ilorazów ró¿nicowych\n";
 				BKToNaturalFormTest();
 				break;
 			default:
