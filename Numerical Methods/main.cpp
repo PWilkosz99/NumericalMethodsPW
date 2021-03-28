@@ -15,6 +15,7 @@ int main() {
 			"0 - Wyjscie\n" <<
 			"1 - Horner\n" <<
 			"2 - Interpolacja\n" <<
+			"3 - Uk³ady równañ liniowych\n" <<
 			"9 - Testy\n";
 		cin >> choice;
 		if (!cin.good())
@@ -62,6 +63,23 @@ int main() {
 				break;
 			}
 			break;
+		case 3:
+			cout << "Menu programu\n" <<
+				"1 - Metoda Gaussa\n" <<
+				"2 - Metoda Gaussa-Crouta\n";
+			cin >> choice2;
+			switch (choice2)
+			{
+			case 1:
+				ElimGaussFromMain();
+				break;
+			case 2:
+				ElimGaussCroutFromMain();
+				break;
+			default:
+				break;
+			}
+			break;
 			break;
 		case 9:
 			cout << "Menu testów\n" <<
@@ -70,7 +88,10 @@ int main() {
 				"3 - Interpolacja Langrangea\n" <<
 				"4 - Ilorazy ró¿nicowe\n" <<
 				"5 - Ilorazy ró¿nicowe postaci Newtona na postaæ naturaln¹\n" <<
-				"91 - Laboratoria 1-2\n";
+				"6 - Metoda Gaussa\n" <<
+				"7 - Metoda Gaussa-Crouta\n" <<
+				"91 - Laboratoria 1-2\n" <<
+				"92 - Laboratoria 1-2\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -89,6 +110,12 @@ int main() {
 			case 5:
 				BKToNaturalFormTest();
 				break;
+			case 6:
+				ElimGaussTest();
+				break;
+			case 7:
+				ElimGaussCroutTest();
+				break;
 			case 91:
 				cout << "Wyniki dla danych z pliku csv:\n";
 				cout << "\nZad 1 Obliczanie wartoœci wielomianu zadanego w postaci naturalnej dla dowolnej wartoœci x z wykorzystaniem schematu Hornera\n";
@@ -102,6 +129,13 @@ int main() {
 				cout << "\nZad 5 Postaæ Newtona wielomianu Lagrange’a - wyznaczanie ilorazów ró¿nicowych\n";
 				BKToNaturalFormTest();
 				break;
+			case 92:
+				cout << "Wyniki dla macierzy z treœci zadania:\n";
+				cout << "Metoda eliminacji Gaussa:\n";
+				ElimGaussTest();
+				cout << "Metoda eliminacji Gaussa-Crouta:\n";
+				ElimGaussCroutTest();
+				break;
 			default:
 				break;
 			}
@@ -110,14 +144,7 @@ int main() {
 			break;
 		}
 	} while (choice != 0);
-
-	return 0;
 }
-
-
-//double x[] = { 1, 2, 3};
-//double y[] = { 3,5,1 }; 
-//CalculateBK(3, x, y);
 
 /*
 polynomial-1-v2.csv - dane do obliczania schematu Hornera, przyk³adowe wyniki: x = -0.500000    y = -0.677734

@@ -16,10 +16,16 @@ void LagrangeInterpolationFromMain();
 void LagrangeInteprolationTest();
 
 double* CalculateBK(int n, double x[], double y[]);
-//void CalculateBK(int n, double x[], double y[]);
 void CalculateBKFromMain();
 void CalculateBKTest();
 
 double* BKToNaturalForm(int n, double b[], double x[]);
 void BKToNaturalFormTest();
 void BkToNaturalFormFromMain();
+
+double* ElimGauss(double** A, double* b, unsigned int n);
+void ElimGaussFromMain();
+void ElimGaussTest();
+double* ElimGaussCrout(double** A, double* b, unsigned int n);
+void ElimGaussCroutFromMain();
+void ElimGaussCroutTest();

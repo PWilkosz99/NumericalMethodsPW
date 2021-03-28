@@ -142,6 +142,7 @@
     <ClCompile Include="horner.cpp" />
     <ClCompile Include="interpolacje.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="uklady.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.h" />
