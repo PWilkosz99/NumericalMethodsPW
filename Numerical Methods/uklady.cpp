@@ -250,3 +250,28 @@ void ElimGaussCroutTest() {
 		}
 	}
 }
+
+void makeLU(int n, double** A) {
+	int s = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			for (int  k = 0; k < j; k++)
+			{
+				s = s + A[j][k] * A[k][i];	
+
+			}
+			A[j][i] = A[j][i] - s;
+		}
+		for (int j = i + 1; i < n; i++) {
+			s = 0;
+			for (int k = 0; k < j; k++)
+			{
+				s = s + A[j][k] * A[k][i];
+			}
+			A[j][i] = (A[j][i] - s) / A[i][i];
+		}
+	}
+}

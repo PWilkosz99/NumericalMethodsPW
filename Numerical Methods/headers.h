@@ -29,3 +29,5 @@ void ElimGaussTest();
 double* ElimGaussCrout(double** A, double* b, unsigned int n);
 void ElimGaussCroutFromMain();
 void ElimGaussCroutTest();
+
+void makeLU(int n, double** A);

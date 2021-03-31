@@ -1,13 +1,14 @@
 #include <iostream>
-#include "headers.h"
 #include <locale.h>
+#include "headers.h"
+
 
 using namespace std;
 
 int main() {
 	setlocale(LC_CTYPE, "Polish");
 
-	short choice = -1;
+	/*short choice = -1;
 	short choice2 = -1;
 	do
 	{
@@ -143,7 +144,28 @@ int main() {
 		default:
 			break;
 		}
-	} while (choice != 0);
+	} while (choice != 0);*/
+
+	double** a = new double* [5];
+	for (int i = 0; i < 5; i++)
+	{
+		a[i] = new double[5];
+	}
+	a[0][0] = 1.0; a[0][1] = -3.0; a[0][2] = 4.00; a[0][3] = 6.80; a[0][4] = 9.00;
+	a[1][0] = -3.00; a[1][1] = 2.0; a[1][2] = 4.60; a[1][3] = 6.30; a[1][4] = -10.00;
+	a[2][0] = 2.00; a[2][1] = -1.0; a[2][2] = 2.80; a[2][3] = -8.40; a[2][4] = -5.00;
+	a[3][0] = -6.00; a[3][1] = 2.0; a[3][2] = 7.00; a[3][3] = -0.50; a[3][4] = -0.90;
+	a[4][0] = 5.00; a[4][1] = -2.0; a[4][2] = -0.50; a[4][3] = 12.00; a[4][4] = -4.00;
+	int n = 5;
+	makeLU(n, a);
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++)
+		{
+			cout << a[i][j] << " ";
+		}
+		cout << "\n";
+	}
 }
 
 /*
