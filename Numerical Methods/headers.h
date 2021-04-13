@@ -30,4 +30,11 @@ double* ElimGaussCrout(double** A, double* b, unsigned int n);
 void ElimGaussCroutFromMain();
 void ElimGaussCroutTest();
 
-void makeLU(int n, double** A);
+double** LUdecomposition(double** A, int n);
+void PrintMatrices(double** A, int n);
+void PrintVec(double* X, int n, char s);
+void PrintB(double* X, int n);
+void PrintX(double* X, int n);
+double* CalculateX(double** A, double* B, int n);
+void LUFromMain();
+void LUdecompositionTest();

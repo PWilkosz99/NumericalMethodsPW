@@ -8,7 +8,7 @@ using namespace std;
 int main() {
 	setlocale(LC_CTYPE, "Polish");
 
-	/*short choice = -1;
+	short choice = -1;
 	short choice2 = -1;
 	do
 	{
@@ -67,7 +67,8 @@ int main() {
 		case 3:
 			cout << "Menu programu\n" <<
 				"1 - Metoda Gaussa\n" <<
-				"2 - Metoda Gaussa-Crouta\n";
+				"2 - Metoda Gaussa-Crouta\n" <<
+				"3 - Metoda rozk³adu LU\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -77,6 +78,8 @@ int main() {
 			case 2:
 				ElimGaussCroutFromMain();
 				break;
+			case 3:
+				LUFromMain();
 			default:
 				break;
 			}
@@ -91,8 +94,10 @@ int main() {
 				"5 - Ilorazy ró¿nicowe postaci Newtona na postaæ naturaln¹\n" <<
 				"6 - Metoda Gaussa\n" <<
 				"7 - Metoda Gaussa-Crouta\n" <<
+				"8 - Metoda rozk³adu LU\n" <<
 				"91 - Laboratoria 1-2\n" <<
-				"92 - Laboratoria 1-2\n";
+				"92 - Laboratoria 3\n" <<
+				"93 - Laboratoria 4\n";
 			cin >> choice2;
 			switch (choice2)
 			{
@@ -117,6 +122,9 @@ int main() {
 			case 7:
 				ElimGaussCroutTest();
 				break;
+			case 8:
+				LUdecompositionTest();
+				break;
 			case 91:
 				cout << "Wyniki dla danych z pliku csv:\n";
 				cout << "\nZad 1 Obliczanie wartoœci wielomianu zadanego w postaci naturalnej dla dowolnej wartoœci x z wykorzystaniem schematu Hornera\n";
@@ -137,6 +145,8 @@ int main() {
 				cout << "Metoda eliminacji Gaussa-Crouta:\n";
 				ElimGaussCroutTest();
 				break;
+			case 93:
+				LUdecompositionTest();
 			default:
 				break;
 			}
@@ -144,28 +154,7 @@ int main() {
 		default:
 			break;
 		}
-	} while (choice != 0);*/
-
-	double** a = new double* [5];
-	for (int i = 0; i < 5; i++)
-	{
-		a[i] = new double[5];
-	}
-	a[0][0] = 1.0; a[0][1] = -3.0; a[0][2] = 4.00; a[0][3] = 6.80; a[0][4] = 9.00;
-	a[1][0] = -3.00; a[1][1] = 2.0; a[1][2] = 4.60; a[1][3] = 6.30; a[1][4] = -10.00;
-	a[2][0] = 2.00; a[2][1] = -1.0; a[2][2] = 2.80; a[2][3] = -8.40; a[2][4] = -5.00;
-	a[3][0] = -6.00; a[3][1] = 2.0; a[3][2] = 7.00; a[3][3] = -0.50; a[3][4] = -0.90;
-	a[4][0] = 5.00; a[4][1] = -2.0; a[4][2] = -0.50; a[4][3] = 12.00; a[4][4] = -4.00;
-	int n = 5;
-	makeLU(n, a);
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++)
-		{
-			cout << a[i][j] << " ";
-		}
-		cout << "\n";
-	}
+	} while (choice != 0);
 }
 
 /*

@@ -1,6 +1,7 @@
 #include "headers.h"
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -251,27 +252,253 @@ void ElimGaussCroutTest() {
 	}
 }
 
-void makeLU(int n, double** A) {
-	int s = 0;
-
-	for (int i = 0; i < n; i++)
+double** LUdecomposition(double** A, int n) {
+	for (int j = 0; j < n; j++)
 	{
-		for (int j = 0; j <= i; j++)
+		for (int i = 0; i < n; i++)
 		{
-			for (int  k = 0; k < j; k++)
+			if (i <= j)
 			{
-				s = s + A[j][k] * A[k][i];	
-
+				for (int k = 0; k <= i - 1; k++)
+				{
+					A[i][j] -= A[i][k] * A[k][j];
+				}
 			}
-			A[j][i] = A[j][i] - s;
-		}
-		for (int j = i + 1; i < n; i++) {
-			s = 0;
-			for (int k = 0; k < j; k++)
+			else
 			{
-				s = s + A[j][k] * A[k][i];
+				for (int k = 0; k <= j - 1; k++)
+				{
+					A[i][j] -= A[i][k] * A[k][j];
+				}
+				A[i][j] /= A[j][j];
 			}
-			A[j][i] = (A[j][i] - s) / A[i][i];
 		}
 	}
+	return A;
+}
+
+void PrintMatrices(double** A, int n)
+{
+	cout << "Macierz L:\n";
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			if (j < i)
+			{
+				printf("%10.3lf", A[i][j]);
+			}
+			else if (j == i)
+			{
+				printf("%10.3lf", 1.0);
+			}
+			else
+			{
+				printf("%10.3lf", 0.0);
+			}
+		printf("\n");
+	}
+
+	cout << "Macierz U:\n";
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (j > i - 1) {
+				printf("%10.3f", A[i][j]);
+			}
+			else {
+				printf("%10.3f", 0.0);
+			}
+
+		}
+		printf("\n");
+	}
+}
+
+void PrintVec(double* X, int n, char s) {
+	cout << "Wektor " << s << ":\n";
+	for (int i = 0; i < n; i++)
+	{
+		printf("%c%d: %10.3f", s, i, X[i]);
+		printf("\n");
+	}
+}
+
+void PrintB(double* X, int n) {
+	PrintVec(X, n, 'B');
+}
+
+void PrintX(double* X, int n) {
+	PrintVec(X, n, 'X');
+}
+
+void PrintMatrix(double** A, int n) {
+	cout << "Macierz A:\n";
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			printf("%10.3lf", A[i][j]);
+		printf("\n");
+	}
+}
+
+double* CalculateX(double** A, double* B, int n) {
+	double* XY = new double[n];
+	try {
+		for (int i = 0; i < n; i++)
+		{
+			XY[i] = B[i];
+			for (int j = 0; j < i; j++)
+			{
+				XY[i] -= A[i][j] * XY[j]; //obliczam Y
+			}
+			//cout << XY[i] <<"\n";
+		}
+
+		for (int i = n - 1; i >= 0; i--)
+		{
+			for (int j = i + 1; j < n; j++)
+			{
+				XY[i] -= A[i][j] * XY[j];
+			}
+			if (A[i][i] == 0) {
+				throw "Singular matrix - cannot be calculated";
+			}
+			XY[i] /= A[i][i];
+		}
+		return XY;
+	}
+	catch (const char* msg)
+	{
+		cerr << msg << endl;
+	}
+}
+
+double** loadMatrix(ifstream& plik) {
+	int n;
+	plik >> n;
+
+	double** A = new double* [n];
+
+	for (int i = 0, j; i < n; ++i) {
+		double* col = new double[n];
+
+		for (j = 0; j < n; ++j) {
+			plik >> col[j];
+		}
+		A[i] = col;
+	}
+	return A;
+}
+
+double* loadVector(ifstream& plik) {
+	int n;
+	plik >> n;
+
+	double* v = new double[n];
+	for (int i = 0; i < n; i++) {
+		plik >> v[i];
+	}
+	return v;
+}
+
+void LUFromMain() {
+	int n = 0;
+	cout<<"Podaj rozmiar macierzy:\n";
+	cin >> n;
+	double** A = new double* [n];
+	for (int i = 0; i < n; i++)
+	{
+		A[i] = new double[n];
+	}
+	double* B = new double[n];
+	double* X = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			printf("Wprowadz wartoœæ A[%d][%d] elementu: ", i, j);
+			cin >> A[i][j];
+			//scanf_s("%f", &A[i][j]);
+		}
+	}
+	printf("\nWprowadz wartosci wektora B: \n");
+	for (int i = 0; i < n; i++)
+	{
+		printf("B[%d]", i);
+		//scanf_s("%f", &B[i]);
+		cin >> B[i];
+	}
+
+	PrintMatrix(A, 3);
+	PrintB(B, 3);
+
+	A = LUdecomposition(A, 3);
+	PrintMatrices(A, 3);
+	X = CalculateX(A, B, n);
+	PrintX(X, n);
+}
+
+void LUdecompositionTest() {
+
+	int n = 3;
+	double** A = new double* [n];
+	for (int i = 0; i < n; i++)
+	{
+		A[i] = new double[n];
+	}
+	double* B = new double[n];
+	double* X = new double[n];
+
+	//Macierz 1 - przyk³ad z prezentacji
+	ifstream plik("data\\matrix1.txt");
+	A = loadMatrix(plik);
+	PrintMatrix(A, 3);
+
+	B = loadVector(plik);
+	PrintB(B, 3);
+
+	A = LUdecomposition(A, 3);
+	PrintMatrices(A, 3);
+
+	X = CalculateX(A, B, n);
+	//PrintX(X, n);
+	plik.close();
+	//Dla macierzy tej uzyskanie X nie jest mo¿liwe poniewaz macierz jest osobliwa(det=0)
+
+	cout << "\n\n\Rownanie 2:\n";
+
+
+	//Macierz 2
+	ifstream plik2("data\\matrix2.txt");
+	A = loadMatrix(plik2);
+	PrintMatrix(A, 3);
+
+	B = loadVector(plik2);
+	PrintB(B, 3);
+
+	A = LUdecomposition(A, 3);
+	PrintMatrices(A, 3);
+
+	X = CalculateX(A, B, n);
+	PrintX(X, n);
+	plik2.close();
+
+	cout << "\n\n\Rownanie 3:\n";
+
+
+	//Macierz 3
+	ifstream plik3("data\\matrix3.txt");
+	A = loadMatrix(plik3);
+	PrintMatrix(A, 3);
+
+	B = loadVector(plik3);
+	PrintB(B, 3);
+
+	A = LUdecomposition(A, 3);
+	PrintMatrices(A, 3);
+
+	X = CalculateX(A, B, n);
+	PrintX(X, n);
+	plik3.close();
 }
