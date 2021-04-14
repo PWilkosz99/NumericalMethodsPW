@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="horner.cpp" />
-    <ClCompile Include="interpolacje.cpp" />
+    <ClCompile Include="integration.cpp" />
+    <ClCompile Include="interpolations.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="uklady.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="linearequations .cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.h" />

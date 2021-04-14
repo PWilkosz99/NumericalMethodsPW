@@ -1,6 +1,8 @@
 #pragma once
 #include <istream>
 
+void Menu();
+
 double Horner(int n, double w[], double p);
 void HornerFromMain();
 void HornerTest();
