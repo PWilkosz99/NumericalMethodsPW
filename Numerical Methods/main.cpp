@@ -6,5 +6,7 @@
 using namespace std;
 
 int main() {
-	Menu();
+	//Menu();
+	cout << TrapezoidalRule(5.0, f1) << "\n";
+	cout<<TrapezoidalRule(5.0,f2);
 }

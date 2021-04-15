@@ -53,4 +53,15 @@
       <Filter>Pliki zasobów</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\matrix3.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\matrix1.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\matrix2.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

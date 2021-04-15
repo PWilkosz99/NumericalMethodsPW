@@ -155,6 +155,11 @@
     <None Include="data\polynomial-3-v2.csv" />
     <None Include="data\polynomial-4-v2.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\matrix1.txt" />
+    <Text Include="data\matrix2.txt" />
+    <Text Include="data\matrix3.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

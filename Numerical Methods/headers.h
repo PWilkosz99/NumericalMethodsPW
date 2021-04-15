@@ -40,3 +40,10 @@ void PrintX(double* X, int n);
 double* CalculateX(double** A, double* B, int n);
 void LUFromMain();
 void LUdecompositionTest();
+
+
+///tmp
+typedef double(*func)(double);
+double f1(double x);
+double f2(double x);
+double TrapezoidalRule(double x, func f);
