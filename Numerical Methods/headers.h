@@ -1,5 +1,7 @@
 #pragma once
 #include <istream>
+#include <fstream>
+#include <vector>
 
 void Menu();
 
@@ -46,4 +48,4 @@ void LUdecompositionTest();
 typedef double(*func)(double);
 double f1(double x);
 double f2(double x);
-double TrapezoidalRule(double x, func f);
+double TrapezoidalRule(std::vector<double> points, func f);
