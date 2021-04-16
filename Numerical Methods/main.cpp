@@ -35,6 +35,8 @@ int main() {
 	vector<double> B = loadPoints(file2);
 	file2.close();
 
-	cout << TrapezoidalRule(B, f1);
+	//cout << TrapezoidalRule(B, f1);
+
+	cout << SimpsonRule(100, 0, 2, f3);
 
 }

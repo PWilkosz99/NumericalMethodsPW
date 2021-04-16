@@ -17,6 +17,10 @@ double f2(double x) {
     return exp(x * x) * (x - 1);
 }
 
+double f3(double x) {
+	return x;
+}
+
 double TrapezoidalRule(vector<double> points, func f) {
 	double result = 0.0;
 	double dx;
@@ -26,4 +30,23 @@ double TrapezoidalRule(vector<double> points, func f) {
 		result += (dx / 2.0) * f(points[i - 1]) + (dx / 2.0) * f(points[i - 1]);
 	}
 	return result;
+}
+
+double SimpsonRule(double n, double a, double b, func f) {
+	double x;
+	double s1 = 0.0;
+	double s2 = 0.0;
+
+	double dx = (b - a) / n;
+
+	for (int i = 1; i <= n; i++)
+	{
+		x = a + i * dx;
+		s2 += f(x - dx / 2);
+		if (i < n) 
+		{
+			s1 += f(x);
+		}
+	}
+	return dx / 6 * (f(a) + f(b) + 2 * s1 + 4 * s2);
 }
