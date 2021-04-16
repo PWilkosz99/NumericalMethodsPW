@@ -37,6 +37,7 @@ int main() {
 
 	//cout << TrapezoidalRule(B, f1);
 
-	cout << SimpsonRule(100, 0, 2, f3);
+	//cout << SimpsonRule(100, 0, 2, f3);
+	cout << TrapezoidalRuleNC(1000, 0, 2, f2);
 
 }
