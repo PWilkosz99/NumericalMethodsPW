@@ -3,6 +3,7 @@
 #include <fstream>
 #include "headers.h"
 #include <vector>
+#include <chrono>
 
 
 using namespace std;
@@ -35,9 +36,12 @@ int main() {
 	vector<double> B = loadPoints(file2);
 	file2.close();
 
-	//cout << TrapezoidalRule(B, f1);
+	ifstream cfile("data\\coefficientsL5.txt");
+	vector<double> coef = loadPoints(cfile);
+	cfile.close();
 
+	cout << TrapezoidalRule(A, coef);
 	//cout << SimpsonRule(100, 0, 2, f3);
-	cout << TrapezoidalRuleNC(1000, 0, 2, f2);
+	//cout << TrapezoidalRuleNC(1000, 0, 2, f2);
 
 }

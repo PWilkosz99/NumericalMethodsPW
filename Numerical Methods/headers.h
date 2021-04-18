@@ -6,6 +6,7 @@
 void Menu();
 
 double Horner(int n, double w[], double p);
+double Horner(int n, std::vector<double> w, double p);
 void HornerFromMain();
 void HornerTest();
 
@@ -43,12 +44,11 @@ double* CalculateX(double** A, double* B, int n);
 void LUFromMain();
 void LUdecompositionTest();
 
-
-///tmp
 typedef double(*func)(double);
 double f1(double x);
 double f2(double x);
 double f3(double x);
 double TrapezoidalRule(std::vector<double> points, func f);
+double TrapezoidalRule(std::vector<double> points, std::vector<double> coefficients);
 double SimpsonRule(double n, double a, double b, func f);
 double TrapezoidalRuleNC(double n, double a, double b, func f);

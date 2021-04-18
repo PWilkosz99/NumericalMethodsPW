@@ -18,6 +18,14 @@ double Horner(int n, double w[], double p) {
 	return y;
 }
 
+double Horner(int n, vector<double> w, double p) {
+	double y = w[n - 1];
+	for (int i = n - 2; i >= 0; i--) {
+		y = y * p + w[i];
+	}
+	return y;
+}
+
 /// <summary>
 /// UI dla schematu Hornera
 /// </summary>

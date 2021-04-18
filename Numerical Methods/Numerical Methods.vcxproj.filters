@@ -66,5 +66,11 @@
     <Text Include="data\points1.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="data\points2.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\coefficientsL5.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
   </ItemGroup>
 </Project>
