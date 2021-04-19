@@ -45,9 +45,8 @@ void LUFromMain();
 void LUdecompositionTest();
 
 typedef double(*func)(double);
-double f1(double x);
-double f2(double x);
-double f3(double x);
+double f4(double x);
+double f5(double x);
 double TrapezoidalRule(std::vector<double> points, func f);
 double TrapezoidalRule(std::vector<double> points, std::vector<double> coefficients);
 double SimpsonRule(double n, double a, double b, func f);

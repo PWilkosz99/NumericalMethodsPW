@@ -72,5 +72,8 @@
     <Text Include="data\coefficientsL5.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="data\coefficients2L5.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
   </ItemGroup>
 </Project>

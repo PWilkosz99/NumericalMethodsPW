@@ -8,22 +8,12 @@ using namespace std;
 
 typedef double(*func)(double);
 
-
-
-double f1(double x) {
-	return 0.4 * pow(x, 4) + 5.0 * pow(x, 3) + -6.0 * pow(x, 2) + -2.0 * x + 55;
-}
-
-double f2(double x) {
-	return exp(x * x) * (x - 1);
-}
-
-double f3(double x) {
-	return x;
-}
-
 double f4(double x) {
 	return x * x * pow(sin(x), 3);
+}
+
+double f5(double x) {
+	return exp(x * x) * (x - 1);
 }
 
 double TrapezoidalRule(vector<double> points, func f) {
@@ -37,6 +27,7 @@ double TrapezoidalRule(vector<double> points, func f) {
 	return result;
 }
 
+//ZAD1
 double TrapezoidalRule(vector<double> points, vector<double> coefficients) {
 	double result = 0.0;
 	double dx;
@@ -49,13 +40,14 @@ double TrapezoidalRule(vector<double> points, vector<double> coefficients) {
 	return result;
 }
 
+//ZAD2B
 double SimpsonRule(double n, double a, double b, func f) {
 	double x;
 	double s1 = 0.0;
 	double s2 = 0.0;
 
 	double dx = (b - a) / n;
-
+	cout << dx << "\n";
 	for (int i = 1; i <= n; i++)
 	{
 		x = a + i * dx;
@@ -68,12 +60,13 @@ double SimpsonRule(double n, double a, double b, func f) {
 	return dx / 6 * (f(a) + f(b) + 2 * s1 + 4 * s2);
 }
 
+//ZAD2A
 double TrapezoidalRuleNC(double n, double a, double b, func f) {
 	double res = 0.0;
 	double x1;
 	double x2;
 	double dx = (b - a) / n;
-
+	cout << dx << "\n";
 	for (int i = 0; i < n; i++)
 	{
 		x1 = a + i * dx;

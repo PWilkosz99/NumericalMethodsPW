@@ -17,6 +17,7 @@ void Menu() {
 			"1 - Horner\n" <<
 			"2 - Interpolacja\n" <<
 			"3 - Uk³ady równañ liniowych\n" <<
+			"4 - Kwadratury proste\n" <<
 			"9 - Testy\n";
 		cin >> choice;
 		if (!cin.good())
@@ -84,6 +85,22 @@ void Menu() {
 				break;
 			}
 			break;
+		case 4:
+			cout << "Menu programu\n" <<
+				"1 - Metoda trapezow\n" <<
+				"2 - Metoda trapezow(NC) dla pkt rownoodleglych\n" <<
+				"3 - Metoda Simsona(NC) dla pkt nie rownoodleglych\n";
+			cin >> choice2;// TODO
+			switch (choice2)
+			{
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+			default:
+				break;
+			}
 			break;
 		case 9:
 			cout << "Menu testów\n" <<
