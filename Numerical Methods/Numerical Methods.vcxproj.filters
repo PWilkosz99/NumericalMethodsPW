@@ -75,5 +75,17 @@
     <Text Include="data\coefficients2L5.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="data\abscissae3.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\abscissae4.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\abscissae5.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="data\abscissae2.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -5,7 +5,21 @@
 
 using namespace std;
 
+vector<double> loadPoints(ifstream& plik) {
+	vector<double> points;
+	int n;
+	plik >> n;
+	double tmp;
+	double* A = new double[n];
+	for (int i = 0; i < n; ++i) {
+		plik >> tmp;;
+		points.push_back(tmp);
+	}
+	return points;
+}
+
 void Menu() {
+	///WORK IN PROGRESS
 	setlocale(LC_CTYPE, "Polish");
 
 	short choice = -1;

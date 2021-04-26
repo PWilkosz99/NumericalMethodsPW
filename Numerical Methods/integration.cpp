@@ -47,7 +47,6 @@ double SimpsonRule(double n, double a, double b, func f) {
 	double s2 = 0.0;
 
 	double dx = (b - a) / n;
-	cout << dx << "\n";
 	for (int i = 1; i <= n; i++)
 	{
 		x = a + i * dx;
@@ -66,7 +65,6 @@ double TrapezoidalRuleNC(double n, double a, double b, func f) {
 	double x1;
 	double x2;
 	double dx = (b - a) / n;
-	cout << dx << "\n";
 	for (int i = 0; i < n; i++)
 	{
 		x1 = a + i * dx;
@@ -75,4 +73,65 @@ double TrapezoidalRuleNC(double n, double a, double b, func f) {
 		res += 0.5 * (x2 - x1) * (f(x1) + f(x2));
 	}
 	return res;
+}
+
+//LAB7
+double GaussLegendre(int n, double x1, double x2, func f) {
+	if (x1 > x2)
+	{
+		double tmp = x1;
+		x1 = x2;
+		x2 = tmp;
+	}
+	try {
+		n++;//ze wzgledu na nomenklature z prezentacji
+		if (n <= 5) {
+			double* A = new double[n];
+			double* X = new double[n];
+
+			ifstream file;
+
+			switch (n) {
+			case 2://ilosc wezlow
+				file.open("data\\abscissae2.txt");
+				break;
+			case 3:
+				file.open("data\\abscissae3.txt");
+				break;
+			case 4:
+				file.open("data\\abscissae4.txt");
+				break;
+			case 5:
+				file.open("data\\abscissae5.txt");
+				break;
+			}
+
+			for (int i = 0; i < n; i++)
+			{
+				file >> X[i];
+				file >> A[i];
+			}
+
+			file.close();
+
+			double a = (x2 - x1) * 0.5;
+			double b = (x2 + x1) * 0.5;
+			double S = 0;
+			double t;
+
+			for (int i = 0; i < n; ++i) {
+				t = b + a * X[i];
+				S += A[i] * f(t);
+			}
+			return a * S;
+		}
+		else
+		{
+			throw "Funkcja dzia³a dla mniejszego od 5";
+		}
+	}
+	catch (const char* msg)
+	{
+		cerr << msg << endl;
+	}
 }

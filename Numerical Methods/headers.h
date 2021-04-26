@@ -3,7 +3,10 @@
 #include <fstream>
 #include <vector>
 
+
+
 void Menu();
+std::vector<double> loadPoints(std::ifstream& plik);
 
 double Horner(int n, double w[], double p);
 double Horner(int n, std::vector<double> w, double p);
@@ -51,3 +54,5 @@ double TrapezoidalRule(std::vector<double> points, func f);
 double TrapezoidalRule(std::vector<double> points, std::vector<double> coefficients);
 double SimpsonRule(double n, double a, double b, func f);
 double TrapezoidalRuleNC(double n, double a, double b, func f);
+
+double GaussLegendre(int n, double a, double b, func f);
