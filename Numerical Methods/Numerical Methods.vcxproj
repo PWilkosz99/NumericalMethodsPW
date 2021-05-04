@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="approximation.cpp" />
     <ClCompile Include="horner.cpp" />
     <ClCompile Include="integration.cpp" />
     <ClCompile Include="interpolations.cpp" />

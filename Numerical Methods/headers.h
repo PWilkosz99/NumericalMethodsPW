@@ -56,3 +56,5 @@ double SimpsonRule(double n, double a, double b, func f);
 double TrapezoidalRuleNC(double n, double a, double b, func f);
 
 double GaussLegendre(int n, double a, double b, func f);
+
+void start();
