@@ -60,7 +60,7 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 	if (Poly1.size() < Poly2.size()) {
 		for (int i = 0; i < Poly1.size(); i++)
 		{
-			Poly1[i] = -Poly2[i];
+			Poly1[i] -= Poly2[i];
 		}
 		for (int i = Poly1.size(); i < Poly2.size(); i++)
 		{
@@ -70,7 +70,7 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 	else {
 		for (int i = 0; i < Poly2.size(); i++)
 		{
-			Poly1[i] = -Poly2[i];
+			Poly1[i] -= Poly2[i];
 		}
 	}
 	return Poly1;
@@ -88,19 +88,25 @@ vector<vector<double>> GramSchmidt(vector<vector<double>> fi) {
 	double div;
 	vector<double> sumvec;
 	vector<vector<double>> gi;
+	bool opr = false;
 	//gi.resize(fi.size());
 	for (int i = 0; i < fi.size(); i++)
 	{
 		if (i == 0) {
 			gi.push_back(fi[i]);
+			continue;
 		}
-		for (int j = 0; j < i - 1; j++)
+		for (int j = 0; j < i; j++)
 		{
-			div = (DotProduct(fi[i], gi[i]) / DotProduct(gi[i], gi[i]));
+			opr = true;
+			div = (DotProduct(fi[i-1], gi[i-1]) / DotProduct(gi[i-1], gi[i-1]));
 			sumvec = PolySum(PolyMultiplicationByNumeral(gi[j], div), sumvec);
 		}
-		 gi.push_back(PolySub(fi[i], sumvec));
-		sumvec.clear();
+		if (opr) {
+			gi.push_back(PolySub(fi[i], sumvec));
+			sumvec.clear();
+			opr = false;
+		}
 	}
 	return gi;
 }

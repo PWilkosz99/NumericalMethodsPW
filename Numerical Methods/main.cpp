@@ -11,9 +11,9 @@ int main() {
 
 	vector<double> vec = {20, 1, 5};
 
-	vector<double> p1 = {1, 1, 1};
-	vector<double> p2 = { 7, 1, 1 };
-	vector<double> p3 = { 5, 3, 1 };
+	vector<double> p1 = {1, 0, 0};
+	vector<double> p2 = { 7, 1, 0 };
+	vector<double> p3 = { 5, 12, 1 };
 	vector<vector<double>> A;
 	A.push_back(p1);
 	A.push_back(p2);
@@ -21,7 +21,7 @@ int main() {
 	vector<vector<double>> Q = GramSchmidt(A);
 	for (vector<double>V : Q) {
 		for (double n : V) {
-			cout << n;
+			cout << n << "\t";
 		}
 		cout << "\n";
 	}
