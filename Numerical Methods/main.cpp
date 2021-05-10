@@ -18,6 +18,7 @@ int main() {
 	A.push_back(p1);
 	A.push_back(p2);
 	A.push_back(p3);
+	//vector<vector<double>> Q = GramSchmidt(A);
 	vector<vector<double>> Q = GramSchmidt(A);
 	for (vector<double>V : Q) {
 		for (double n : V) {

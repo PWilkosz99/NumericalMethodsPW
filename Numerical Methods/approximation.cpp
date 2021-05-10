@@ -111,4 +111,31 @@ vector<vector<double>> GramSchmidt(vector<vector<double>> fi) {
 	return gi;
 }
 
+vector<vector<double>> ThreeFormula(vector<vector<double>> fi) {
+	double c, d;
+	int a = 1;
+
+	vector<vector<double>> baza;
+	vector<double> tmp;
+	tmp.push_back(1.0);
+	auto bazap = PolyMultiplicationByNumeral(baza[0], a);
+	//baza n+1
+	auto b1 = -DotProduct(bazap, baza[1]) / DotProduct(baza[1], baza[1]);
+	auto baza2 = 1.0;
+	for (int i = 0; 3 < fi.size(); i++)
+	{
+		//bazap = razyx(baza[:, i - 1])
+		auto i1 = DotProduct(bazap, baza[i-1]);
+		auto i2 = DotProduct(baza[i - 1], baza[i-1]);
+		auto i3 = DotProduct(baza[i - 2], baza[i - 2]);
+		c = i1 / i2;
+		d = i2 / i3;
+		for (int j = 1; j < fi.size(); j++)
+		{
+			baza[i] = PolySub(bazap,(PolySub(PolyMultiplicationByNumeral(baza[i - 1], c),PolyMultiplicationByNumeral(baza[i - 2], d))));
+		}
+	}
+	return baza;
+}
+
 
