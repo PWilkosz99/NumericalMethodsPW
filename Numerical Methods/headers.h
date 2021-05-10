@@ -1,5 +1,6 @@
 #pragma once
 #include <istream>
+#include <iostream>
 #include <fstream>
 #include <vector>
 
@@ -58,5 +59,7 @@ double SimpsonRule(double n, double a, double b, func f);
 double TrapezoidalRuleNC(double n, double a, double b, func f);
 
 double GaussLegendre(int n, double a, double b, func f);
+
+double DotProduct(std::vector<double> poly1, std::vector<double> poly2);
 
 void start();

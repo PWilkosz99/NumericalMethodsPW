@@ -10,5 +10,11 @@ int main() {
 	//Menu();
 
 	vector<double> vec = {20, 1, 5};
-	cout << TrapezoidalRuleNC(1000, 0, 5, vec);
+
+	vector<double> p1 = {20, 1, 5};
+	vector<double> p2 = {20, 1, 5, 5 , 2, 6,};
+
+	DotProduct(p1, p2);
+
+	//cout << TrapezoidalRuleNC(1000, 0, 5, vec);
 }
