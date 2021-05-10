@@ -14,5 +14,7 @@ int main() {
 	vector<double> p1 = {20, 1, 5};
 	vector<double> p2 = {20, 1, 5, 5 , 2, 6,};
 
-	cout << DotProduct(p1, p2);
+	//cout << DotProduct(p1, p2);
+	PolyMultiplicationByNumeral(p1, 10);
+
 }
