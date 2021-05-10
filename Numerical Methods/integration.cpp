@@ -40,6 +40,19 @@ double TrapezoidalRule(vector<double> points, vector<double> coefficients) {
 	return result;
 }
 
+double TrapezoidalRule(double n, double a, double b, vector<double> coefficients) {
+	double result = 0.0;
+	double pos = 0.0;
+	double dx = (b - a) / n;
+	int nj = coefficients.size();
+	for (size_t i = 0; i < n; i++)
+	{
+		result += (dx / 2.0) * Horner(nj, coefficients, pos) + (dx / 2.0) * Horner(nj, coefficients, pos+dx);
+		pos += dx;
+	}
+	return result;
+}
+
 //ZAD2B
 double SimpsonRule(double n, double a, double b, func f) {
 	double x;
@@ -71,6 +84,23 @@ double TrapezoidalRuleNC(double n, double a, double b, func f) {
 		x2 = a + (i + 1.0) * dx;
 
 		res += 0.5 * (x2 - x1) * (f(x1) + f(x2));
+	}
+	return res;
+}
+
+//ZAD2A
+double TrapezoidalRuleNC(double n, double a, double b, vector<double> coefficients) {
+	double res = 0.0;
+	double x1;
+	double x2;
+	double dx = (b - a) / n;
+	int nj = coefficients.size();
+	for (int i = 0; i < n; i++)
+	{
+		x1 = a + i * dx;
+		x2 = a + (i + 1.0) * dx;
+
+		res += 0.5 * (x2 - x1) * (Horner(nj, coefficients, x1) + Horner(nj, coefficients, x2));
 	}
 	return res;
 }

@@ -52,6 +52,8 @@ double f4(double x);
 double f5(double x);
 double TrapezoidalRule(std::vector<double> points, func f);
 double TrapezoidalRule(std::vector<double> points, std::vector<double> coefficients);
+double TrapezoidalRule(double n, double a, double b, std::vector<double> coefficients);
+double TrapezoidalRuleNC(double n, double a, double b, std::vector<double> coefficients);
 double SimpsonRule(double n, double a, double b, func f);
 double TrapezoidalRuleNC(double n, double a, double b, func f);
 
