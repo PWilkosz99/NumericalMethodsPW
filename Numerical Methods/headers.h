@@ -70,4 +70,5 @@ std::vector<double> PolySub(std::vector<double> Poly1, std::vector<double>Poly2)
 std::vector<std::vector<double>> GramSchmidt(std::vector<std::vector<double>> fi, std::pair<int, int> range);
 std::vector<std::vector<double>> GramSchmidt2(std::vector<std::vector<double>> fi, std::pair<int, int> range);
 std::vector<std::vector<double>> ThreeFormula(std::vector<std::vector<double>> fi, std::pair<int, int> range);
+double DotProduct2(std::vector<double> fx, std::vector<double> gx, std::pair<int, int> range);
 double iloczynSkalarny(std::vector<double> w1, std::vector<double> w2);

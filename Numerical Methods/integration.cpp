@@ -72,6 +72,24 @@ double SimpsonRule(double n, double a, double b, func f) {
 	return dx / 6 * (f(a) + f(b) + 2 * s1 + 4 * s2);
 }
 
+//double SimpsonRule(double n, double a, double b, func f) {
+//	double x;
+//	double s1 = 0.0;
+//	double s2 = 0.0;
+//
+//	double dx = (b - a) / n;
+//	for (int i = 1; i <= n; i++)
+//	{
+//		x = a + i * dx;
+//		s2 += f(x - dx / 2);
+//		if (i < n)
+//		{
+//			s1 += f(x);
+//		}
+//	}
+//	return dx / 6 * (f(a) + f(b) + 2 * s1 + 4 * s2);
+//	}
+
 //ZAD2A
 double TrapezoidalRuleNC(double n, double a, double b, func f) {
 	double res = 0.0;
@@ -94,7 +112,7 @@ double TrapezoidalRuleNC(double n, double a, double b, vector<double> coefficien
 	double x1;
 	double x2;
 	double dx = (b - a) / n;
-	int nj = coefficients.size();
+	int nj = coefficients.size()-1;
 	for (int i = 0; i < n; i++)
 	{
 		x1 = a + i * dx;
