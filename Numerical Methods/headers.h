@@ -63,9 +63,9 @@ double GaussLegendre(int n, double a, double b, func f);
 
 std::vector<double> PolyMultiplication(std::vector<double> Poly1, std::vector<double> Poly2);
 std::vector<double> PolyMultiplicationByNumeral(std::vector<double> Poly1, int nmr);
-double DotProduct(std::vector<double> poly1, std::vector<double> poly2);
+double DotProduct(std::vector<double> poly1, std::vector<double> poly2, std::pair<int, int> range);
 std::vector<double> PolySum(std::vector<double> Poly1, std::vector<double>Poly2);
 std::vector<double> PolySub(std::vector<double> Poly1, std::vector<double>Poly2);
-std::vector<std::vector<double>> GramSchmidt(std::vector<std::vector<double>> fi);
-std::vector<std::vector<double>> ThreeFormula(std::vector<std::vector<double>> fi);
-void start();
+std::vector<std::vector<double>> GramSchmidt(std::vector<std::vector<double>> fi, std::pair<int, int> range);
+std::vector<std::vector<double>> ThreeFormula(std::vector<std::vector<double>> fi, std::pair<int, int> range);
+double iloczynSkalarny(std::vector<double> w1, std::vector<double> w2);

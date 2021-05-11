@@ -77,14 +77,27 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 }
 
 // 1 + x + x^2 + x^3
-double DotProduct(vector<double> fx, vector<double> gx) {
+double DotProduct(vector<double> fx, vector<double> gx, pair<int, int> range) {
 
-	double res = TrapezoidalRuleNC(10000, -1, 1, PolyMultiplication(fx, gx));
+	double res = TrapezoidalRuleNC(10000, range.first, range.second, PolyMultiplication(fx, gx));
 
 	return res;
 }
 
-vector<vector<double>> GramSchmidt(vector<vector<double>> fi) {
+double iloczynSkalarny(vector<double> w1, vector<double> w2) { //p1, p2 - granice calki
+	double h = 0.002;
+	double p1 = -1;
+	double p2 = 1;
+
+	double suma = 0;
+	for (double b = p1 + h; b <= p2; b += h) {
+		double a = b - h;
+		suma += (w1[a] * w2[a]+ w1[b] * w2[b] / 2 * (b - a));
+	}
+	return suma;
+}
+
+vector<vector<double>> GramSchmidt(vector<vector<double>> fi, pair<int, int> range) {
 	double div;
 	vector<double> sumvec;
 	vector<vector<double>> gi;
@@ -99,7 +112,7 @@ vector<vector<double>> GramSchmidt(vector<vector<double>> fi) {
 		for (int j = 0; j < i; j++)
 		{
 			opr = true;
-			div = (DotProduct(fi[i-1], gi[i-1]) / DotProduct(gi[i-1], gi[i-1]));
+			div = (DotProduct(fi[i-1], gi[i-1], range) / DotProduct(gi[i-1], gi[i-1], range));
 			sumvec = PolySum(PolyMultiplicationByNumeral(gi[j], div), sumvec);
 		}
 		if (opr) {
@@ -111,28 +124,31 @@ vector<vector<double>> GramSchmidt(vector<vector<double>> fi) {
 	return gi;
 }
 
-vector<vector<double>> ThreeFormula(vector<vector<double>> fi) {
+vector<vector<double>> ThreeFormula(vector<vector<double>> fi, pair<int, int> range) {
 	double c, d;
 	int a = 1;
-
+	int n = fi.size();
 	vector<vector<double>> baza;
 	vector<double> tmp;
-	tmp.push_back(1.0);
-	auto bazap = PolyMultiplicationByNumeral(baza[0], a);
-	//baza n+1
-	auto b1 = -DotProduct(bazap, baza[1]) / DotProduct(baza[1], baza[1]);
-	auto baza2 = 1.0;
-	for (int i = 0; 3 < fi.size(); i++)
+	double b1 = 1.0;
+	auto bazap = PolyMultiplicationByNumeral(fi[0], a);
+	double b2 = -DotProduct(bazap, fi[0], range) / DotProduct(fi[0], fi[0], range);
+	double b3 = 1.0;
+	tmp.push_back(b1);
+	tmp.push_back(b2);
+	tmp.push_back(b3);
+	baza.push_back(tmp);
+	for (int i = 3; i <n+1; i++)
 	{
-		//bazap = razyx(baza[:, i - 1])
-		auto i1 = DotProduct(bazap, baza[i-1]);
-		auto i2 = DotProduct(baza[i - 1], baza[i-1]);
-		auto i3 = DotProduct(baza[i - 2], baza[i - 2]);
+		bazap = PolyMultiplicationByNumeral(fi[i - 1],a);
+		auto i1 = DotProduct(bazap, fi[i-1], range);
+		auto i2 = DotProduct(fi[i - 1], fi[i-1], range);
+		auto i3 = DotProduct(fi[i - 2], fi[i - 2], range);
 		c = i1 / i2;
 		d = i2 / i3;
 		for (int j = 1; j < fi.size(); j++)
 		{
-			baza[i] = PolySub(bazap,(PolySub(PolyMultiplicationByNumeral(baza[i - 1], c),PolyMultiplicationByNumeral(baza[i - 2], d))));
+			baza.push_back(PolySub(bazap,(PolySub(PolyMultiplicationByNumeral(fi[i - 1], c),PolyMultiplicationByNumeral(fi[i - 2], d)))));
 		}
 	}
 	return baza;
