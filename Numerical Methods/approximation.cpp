@@ -1,4 +1,5 @@
 #include "headers.h"
+#include <vector>
 
 using namespace std;
 
@@ -123,19 +124,6 @@ double DotProduct(vector<double> fx, vector<double> gx, pair<int, int> range) {
 	return res;
 }
 
-double iloczynSkalarny(vector<double> w1, vector<double> w2) { //p1, p2 - granice calki
-	double h = 0.002;
-	double p1 = -1;
-	double p2 = 1;
-
-	double suma = 0;
-	for (double b = p1 + h; b <= p2; b += h) {
-		double a = b - h;
-		suma += (w1[a] * w2[a]+ w1[b] * w2[b] / 2 * (b - a));
-	}
-	return suma;
-}
-
 vector<vector<double>> GramSchmidt(vector<vector<double>> fi, pair<int, int> range) {
 	double div;
 	vector<double> sumvec;
@@ -161,6 +149,48 @@ vector<vector<double>> GramSchmidt(vector<vector<double>> fi, pair<int, int> ran
 		}
 	}
 	return gi;
+}
+
+vector<double> empty(int n) {
+	vector<double> v(n);
+	for (int i = 0; i < n; i++) {
+		v[i] = 0;
+	}
+	return v;
+}
+
+vector<vector<double>> GramSchmidt2(vector<vector<double>> fi, pair<int, int> range) {
+	int n = 3;
+	vector<vector<double>> bazaS(n);
+	bazaS = fi;
+	vector<vector<double>> bazaO(n);
+
+	bazaO[0] = bazaS[0];
+	vector<double> gjgj;
+	for (int i = 2; i <= n; i++) {
+		vector<double> suma = empty(i);
+		for (int j = 1; j <= i - 1; j++) {
+			double wynik_gj; //wynik z mnozenia gj*gj
+			if (j > gjgj.size()) {
+				wynik_gj = DotProduct(bazaO[j - 1], bazaO[j - 1],range);
+				gjgj.push_back(wynik_gj);
+			}
+			else {
+				wynik_gj = gjgj[j - 1];
+			}
+			double alfa = DotProduct(bazaO[i - 1], bazaO[j - 1], range) / wynik_gj;
+			suma = PolySum(suma, bazaO[j - 1]);
+		}
+		bazaO[i - 1] = PolySub(bazaS[i - 1], suma);
+	}
+	for (int i = 0; i < bazaO.size(); i++) {
+		for (int j = 0; j < bazaO[i].size(); j++) {
+			if (bazaO[i][j] < 0.01 && bazaO[i][j] > -0.01)
+				bazaO[i][j] = 0;
+		}
+	}
+	return bazaO;
+
 }
 
 vector<vector<double>> ThreeFormula(vector<vector<double>> fi, pair<int, int> range) {

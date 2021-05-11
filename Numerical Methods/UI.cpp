@@ -20,7 +20,6 @@ vector<double> loadPoints(ifstream& plik) {
 
 void Menu() {
 	///WORK IN PROGRESS
-	setlocale(LC_CTYPE, "Polish");
 
 	short choice = -1;
 	short choice2 = -1;

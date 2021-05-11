@@ -6,6 +6,7 @@
 
 
 
+
 void Menu();
 std::vector<double> loadPoints(std::ifstream& plik);
 
@@ -67,5 +68,6 @@ double DotProduct(std::vector<double> poly1, std::vector<double> poly2, std::pai
 std::vector<double> PolySum(std::vector<double> Poly1, std::vector<double>Poly2);
 std::vector<double> PolySub(std::vector<double> Poly1, std::vector<double>Poly2);
 std::vector<std::vector<double>> GramSchmidt(std::vector<std::vector<double>> fi, std::pair<int, int> range);
+std::vector<std::vector<double>> GramSchmidt2(std::vector<std::vector<double>> fi, std::pair<int, int> range);
 std::vector<std::vector<double>> ThreeFormula(std::vector<std::vector<double>> fi, std::pair<int, int> range);
 double iloczynSkalarny(std::vector<double> w1, std::vector<double> w2);
