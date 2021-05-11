@@ -2,6 +2,7 @@
 
 using namespace std;
 
+[[deprecated("For polynomial multiply, not coordinate by coordinate")]]
 vector<double> PolyMultiplication(vector<double> Poly1, vector<double> Poly2) {
 	vector<double> Poly3;
 	Poly3.resize(Poly1.size() + Poly2.size() - 1, 0);
@@ -12,6 +13,44 @@ vector<double> PolyMultiplication(vector<double> Poly1, vector<double> Poly2) {
 		}
 	}
 	return Poly3;
+}
+
+
+vector<double> PolyMultiplicationVec(vector<double> Poly1, vector<double> Poly2) {
+	vector<double> Poly3;
+	Poly3.resize(Poly1.size() + Poly2.size() - 1, 0);
+
+	bool mxa = false;
+	int mx = 0;
+	int mi = 0;
+	if (Poly1.size() > Poly2.size()) {
+		mxa = true;
+		mx = Poly1.size();
+		mi = Poly2.size();
+	}
+	else
+	{
+		mx = Poly2.size();
+		mi = Poly1.size();
+	}
+
+	for (int i = 0; i < mi; i++)
+	{
+		if (mxa) {
+			Poly1[i] *= Poly2[i];
+		}
+		else {
+			Poly2[i] *= Poly1[i];
+		}
+	}
+
+	if (mxa) {
+		return Poly1;
+	}
+	else
+	{
+		return Poly2;
+	}
 }
 
 vector<double> PolyMultiplicationByNumeral(vector<double> Poly1, int nmr) {
@@ -79,7 +118,7 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 // 1 + x + x^2 + x^3
 double DotProduct(vector<double> fx, vector<double> gx, pair<int, int> range) {
 
-	double res = TrapezoidalRuleNC(10000, range.first, range.second, PolyMultiplication(fx, gx));
+	double res = TrapezoidalRuleNC(10000, range.first, range.second, PolyMultiplicationVec(fx, gx));
 
 	return res;
 }

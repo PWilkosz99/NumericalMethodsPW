@@ -11,7 +11,7 @@ int main() {
 
 	//Algorytm Grama-Schmidta
 	vector<double> p1 = { 1, 0, 0 };
-	vector<double> p2 = { 1, 1, 0 };
+	vector<double> p2 = { 3, 1, 0 };
 	vector<double> p3 = { 1, 1, 1 };
 	vector<vector<double>> A;
 	A.push_back(p1);
@@ -25,7 +25,7 @@ int main() {
 		cout << "\n";
 	}
 	cout << "Wartoœci iloczynow skalarnych:\n";
-	cout << iloczynSkalarny(Q[0], Q[1])<< "\n";
+	cout << DotProduct(Q[0], Q[1], make_pair(-1, 1)) << "\n";
 	cout << DotProduct(Q[1], Q[2], make_pair(-1, 1)) << "\n";
 	cout << DotProduct(Q[0], Q[2], make_pair(-1, 1)) << "\n";
 
