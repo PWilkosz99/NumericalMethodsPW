@@ -3,63 +3,57 @@
 
 using namespace std;
 
-[[deprecated("For polynomial multiply, not coordinate by coordinate")]]
-vector<double> PolyMultiplication(vector<double> Poly1, vector<double> Poly2) {
-	vector<double> Poly3;
-	Poly3.resize(Poly1.size() + Poly2.size() - 1, 0);
+class Polynomial {
 
-	for (int i = 0; i != Poly1.size(); i++) {
-		for (int j = 0; j != Poly2.size(); j++) {
-			Poly3[i + j] += Poly1[i] * Poly2[j];
-		}
-	}
-	return Poly3;
-}
+public:
+	func* f;
+	vector <double> poly;
 
-
-vector<double> PolyMultiplicationVec(vector<double> Poly1, vector<double> Poly2) {
-	vector<double> Poly3;
-	Poly3.resize(Poly1.size() + Poly2.size() - 1, 0);
-
-	bool mxa = false;
-	int mx = 0;
-	int mi = 0;
-	if (Poly1.size() > Poly2.size()) {
-		mxa = true;
-		mx = Poly1.size();
-		mi = Poly2.size();
-	}
-	else
+	Polynomial(func* f, vector<double> poly)
 	{
-		mx = Poly2.size();
-		mi = Poly1.size();
+		this->poly = poly;
+		this->f = f;
 	}
 
-	for (int i = 0; i < mi; i++)
+	double value(double x)
 	{
-		if (mxa) {
-			Poly1[i] *= Poly2[i];
+		double sum = 0;
+		for (int i = 0; i < poly.size(); i++)
+		{
+			sum += poly[i] * f[i](x);
 		}
-		else {
-			Poly2[i] *= Poly1[i];
-		}
+		return sum;
 	}
+};
 
-	if (mxa) {
-		return Poly1;
-	}
-	else
-	{
-		return Poly2;
-	}
-}
+double x0(double x) { return 1; }
+double x1(double x) { return x; }
+double x2(double x) { return pow(x, 2); }
+double x3(double x) { return pow(x, 3); }
+double x4(double x) { return pow(x, 4); }
+double x5(double x) { return pow(x, 5); }
+double x6(double x) { return pow(x, 6); }
+double x7(double x) { return pow(x, 7); }
+double x8(double x) { return pow(x, 8); }
+double x9(double x) { return pow(x, 9); }
 
-vector<double> PolyMultiplicationByNumeral(vector<double> Poly1, int nmr) {
+vector<double> PolyMultiplicationByNumeral(vector<double> Poly1, double nmr) {
 	for (int i = 0; i < Poly1.size(); i++)
 	{
 		Poly1[i] *= nmr;
 	}
 	return Poly1;
+}
+
+double DotProduct(double s, pair<double,double> g, Polynomial poly1, Polynomial poly2) {
+	double a;
+	double sum = 0;
+	for (double b = g.first + s; b <= g.second; b += s)//Trapezoidal Method
+	{
+		double a = b - s;
+		sum += ((poly1.value(a) * poly2.value(a) + poly1.value(b) * poly2.value(b)) / 2) * (b - a);//p=1
+	}
+	return sum;
 }
 
 vector<double> PolySum(vector<double> Poly1, vector<double>Poly2) {
@@ -97,7 +91,8 @@ vector<double> PolySum(vector<double> Poly1, vector<double>Poly2) {
 }
 
 vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
-	if (Poly1.size() < Poly2.size()) {
+	if (Poly1.size() < Poly2.size()) 
+	{
 		for (int i = 0; i < Poly1.size(); i++)
 		{
 			Poly1[i] -= Poly2[i];
@@ -107,7 +102,8 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 			Poly1.push_back(-Poly2[i]);
 		}
 	}
-	else {
+	else 
+	{
 		for (int i = 0; i < Poly2.size(); i++)
 		{
 			Poly1[i] -= Poly2[i];
@@ -116,68 +112,81 @@ vector<double> PolySub(vector<double> Poly1, vector<double>Poly2) {
 	return Poly1;
 }
 
-// 1 + x + x^2 + x^3
-double DotProduct(vector<double> fx, vector<double> gx, pair<int, int> range) {
-	double res = TrapezoidalRuleNC(10000, range.first, range.second, PolyMultiplicationVec(fx, gx));
-	return res;
+vector<double> FillByZero(int n) {
+	vector<double> Poly(n);
+	for (int i = 0; i < n; i++)
+	{
+		Poly[i] = 0.0;
+	}
+	return Poly;
 }
 
-vector<vector<double>> GramSchmidt(vector<vector<double>> fi, pair<int, int> range) {
-	double div;
-	vector<double> sumvec;
-	vector<vector<double>> gi;
-	bool opr = false;
-	//gi.resize(fi.size());
-	for (int i = 0; i < fi.size(); i++)
+vector<vector<double>> GramSchmidt(pair<double,double> g, func* FuncTab, int n) {
+	double resGJ;
+	vector<double> gj;
+	vector<vector<double>> BS(n);
+	vector<vector<double>> BO(n);
+	for (int i = 0; i < n; i++) {
+		BS[i] = FillByZero(n);
+		BS[i][i] = 1;
+	}
+	BO[0] = BS[0];
+	for (int i = 2; i <= n; i++) {
+		vector<double> sum = FillByZero(i);
+		for (int j = 1; j <= i - 1; j++) {
+			if (j > gj.size()) {
+				resGJ = DotProduct(0.001, g, Polynomial(FuncTab, BO[j - 1]), Polynomial(FuncTab, BO[j - 1]));
+				gj.push_back(resGJ);
+			}
+			else 
+			{
+				resGJ = gj[j - 1];
+			}
+			sum = PolySum(PolyMultiplicationByNumeral(BO[j - 1], (DotProduct(0.0001, g, Polynomial(FuncTab, BS[i - 1]), Polynomial(FuncTab, BO[j - 1])) / resGJ)), sum);
+		}
+		BO[i - 1] = PolySub(BS[i - 1], sum);
+	}
+	for (int i = 0; i < BO.size(); i++) 
 	{
-		if (i == 0) {
-			gi.push_back(fi[i]);
-			continue;
-		}
-		for (int j = 0; j < i; j++)
+		for (int j = 0; j < BO[i].size(); j++) 
 		{
-			opr = true;
-			div = (DotProduct(fi[i-1], gi[i-1], range) / DotProduct(gi[i-1], gi[i-1], range));
-			sumvec = PolySum(PolyMultiplicationByNumeral(gi[j], div), sumvec);
-		}
-		if (opr) {
-			gi.push_back(PolySub(fi[i], sumvec));
-			sumvec.clear();
-			opr = false;
+			if (BO[i][j] < 0.01 && BO[i][j] > -0.01) 
+			{
+				BO[i][j] = 0;
+			}
 		}
 	}
-	return gi;
+	return BO;
 }
 
 
-vector<vector<double>> ThreeFormula(vector<vector<double>> fi, pair<int, int> range) {
-	double c, d;
-	int a = 1;
-	int n = fi.size();
-	vector<vector<double>> baza;
-	vector<double> tmp;
-	double b1 = 1.0;
-	auto bazap = PolyMultiplicationByNumeral(fi[0], a);
-	double b2 = -DotProduct(bazap, fi[0], range) / DotProduct(fi[0], fi[0], range);
-	double b3 = 1.0;
-	tmp.push_back(b1);
-	tmp.push_back(b2);
-	tmp.push_back(b3);
-	baza.push_back(tmp);
-	for (int i = 3; i < n + 1; i++)
-	{
-		bazap = PolyMultiplicationByNumeral(fi[i - 1], a);
-		auto i1 = DotProduct(bazap, fi[i - 1], range);
-		auto i2 = DotProduct(fi[i - 1], fi[i - 1], range);
-		auto i3 = DotProduct(fi[i - 2], fi[i - 2], range);
-		c = i1 / i2;
-		d = i2 / i3;
-		for (int j = 1; j < fi.size(); j++)
-		{
-			baza.push_back(PolySub(bazap, (PolySub(PolyMultiplicationByNumeral(fi[i - 1], c), PolyMultiplicationByNumeral(fi[i - 2], d)))));
+void testBazy(double h, pair<double, double> g, vector<vector<double>> baza, double (*ftab[])(double)) {
+	cout << "Baza ortogonalna" << endl;
+	for (int i = 0; i < baza.size(); i++) {
+		for (int j = 0; j < baza[i].size(); j++) {
+			cout << baza[i][j] << " ";
+
+
+		}
+		cout << endl;
+	}
+	for (int i = 0; i < baza.size() - 1; i++) {
+		for (int j = i + 1; j < baza.size(); j++) {
+			double iloczyn = DotProduct(h, g, Polynomial(ftab, baza[i]), Polynomial(ftab, baza[j]));
+			cout << "Iloczyn dla wielomianow " << i + 1 << " i " << j + 1 << " = " << iloczyn << endl;
 		}
 	}
-	return baza;
 }
 
 
+void runable() {
+	func baza[5];
+	baza[0] = x0;
+	baza[1] = x1;
+	baza[2] = x2;
+	baza[3] = x3;
+	baza[4] = x4;
+
+	vector<vector<double>> bazav = GramSchmidt(make_pair(-1,1), baza, 5);
+	testBazy(0.01, make_pair(-1, 1), bazav, baza);
+}
