@@ -61,13 +61,7 @@ double TrapezoidalRuleNC(double n, double a, double b, func f);
 
 double GaussLegendre(int n, double a, double b, func f);
 
-
-std::vector<double> PolyMultiplication(std::vector<double> Poly1, std::vector<double> Poly2);
-std::vector<double> PolyMultiplicationByNumeral(std::vector<double> Poly1, double nmr);
-double DotProduct(std::vector<double> poly1, std::vector<double> poly2, std::pair<int, int> range);
-std::vector<double> PolySum(std::vector<double> Poly1, std::vector<double>Poly2);
-std::vector<double> PolySub(std::vector<double> Poly1, std::vector<double>Poly2);
-std::vector<std::vector<double>> GramSchmidt(std::vector<std::vector<double>> fi, std::pair<int, int> range);
-std::vector<std::vector<double>> ThreeFormula(std::vector<std::vector<double>> fi, std::pair<int, int> range);
-
-void runable();
+std::vector<std::vector<double>> GramSchmidt(std::pair<double, double> g, func* FuncTab, int n);
+std::vector<std::vector<double>> ThreePartRule(std::pair<double, double> g, int n);
+void ScalarTest(double h, std::pair<double, double> g, std::vector<std::vector<double>> baza, func* ftab);
+void PrintBase(std::vector<std::vector<double>> base);
