@@ -42,7 +42,18 @@ double DotProduct(double s, pair<double, double> g, Polynomial poly1, Polynomial
 	for (double b = g.first + s; b <= g.second; b += s)//Trapezoidal Method
 	{
 		double a = b - s;
-		sum += ((poly1.value(a) * poly2.value(a) + poly1.value(b) * poly2.value(b)) / 2) * (b - a);//p=1
+		sum += ((poly1.value(a) * poly2.value(a) + poly1.value(b) * poly2.value(b)) / 2.0) * (b - a);//p=1
+	}
+	return sum;
+}
+
+double DotProduct(double s, pair<double, double> g, func f1, func f2) {
+	double a;
+	double sum = 0;
+	for (double b = g.first + s; b <= g.second; b += s)//Trapezoidal Method
+	{
+		double a = b - s;
+		sum += ((f1(a) * f2(a) + f1(b) * f2(b)) / 2.0) * (b - a);//p=1
 	}
 	return sum;
 }
@@ -225,7 +236,47 @@ void PrintBase(vector<vector<double>> base) {
 	}
 }
 
+double fx(double x)
+{
+	return sin(-x) + exp(-x) - pow(x, 3);
+}
+
+void Approximation(std::vector<func> f, func function)
+{
+	double** AB = new double* [5];
+	for (int i = 0; i < 5; ++i)
+		AB[i] = new double[5];
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			AB[i][j] = DotProduct(0.00001, make_pair(-1, 1), f[j], f[i]);
+		}
+	}
+
+	auto B = new double[5];
+
+	for (int i = 0; i < 5; i++)
+	{
+		B[i] = DotProduct(0.00001, make_pair(-1, 1), function, f[i]);
+	}
+
+	double* X = ElimGauss(AB, B, 5);
+
+	for (int i = 0; i < 5; i++)
+	{
+		std::cout << X[i] << std::endl;
+	}
+}
 
 void runable() {
-	
+	vector<func> base;
+	base.push_back([](double x) {return 1.0; });
+	base.push_back([](double x) { return x; });
+	base.push_back([](double x) { return pow(x, 2); });
+	base.push_back([](double x) { return pow(x, 3); });
+	base.push_back([](double x) { return pow(x, 4); });
+
+	Approximation(base, fx);
 }

@@ -65,3 +65,6 @@ std::vector<std::vector<double>> GramSchmidt(std::pair<double, double> g, func* 
 std::vector<std::vector<double>> ThreePartRule(std::pair<double, double> g, int n);
 void ScalarTest(double h, std::pair<double, double> g, std::vector<std::vector<double>> baza, func* ftab);
 void PrintBase(std::vector<std::vector<double>> base);
+
+
+void runable();
