@@ -58,6 +58,17 @@ double DotProduct(double s, pair<double, double> g, func f1, func f2) {
 	return sum;
 }
 
+double DotProduct(double s, pair<double, double> g, func f1, Polynomial poly2) {
+	double a;
+	double sum = 0;
+	for (double b = g.first + s; b <= g.second; b += s)//Trapezoidal Method
+	{
+		double a = b - s;
+		sum += ((f1(a) * poly2.value(a) + f1(b) * poly2.value(b)) / 2.0) * (b - a);//p=1
+	}
+	return sum;
+}
+
 vector<double> PolySum(vector<double> Poly1, vector<double>Poly2) {
 	bool mxa = false;
 	int mx = 0;
@@ -211,15 +222,15 @@ vector<vector<double>> ThreePartRule(pair<double, double> g, int n) {
 }
 
 
-void ScalarTest(double h, pair<double, double> g, vector<vector<double>> baza, func* ftab) {
+void ScalarTest(double h, pair<double, double> g, vector<vector<double>> base, func* ftab) {
 	double res;
 	cout.precision(5);
 	cout << fixed << "\n";
-	for (int i = 0; i < baza.size() - 1; i++)
+	for (int i = 0; i < base.size() - 1; i++)
 	{
-		for (int j = i + 1; j < baza.size(); j++)
+		for (int j = i + 1; j < base.size(); j++)
 		{
-			res = DotProduct(h, g, Polynomial(ftab, baza[i]), Polynomial(ftab, baza[j]));
+			res = DotProduct(h, g, Polynomial(ftab, base[i]), Polynomial(ftab, base[j]));
 			cout << "Polynomial " << i + 1 << " \u22C5" << " Polynomial" << j + 1 << " = " << res << "\n";//DOT
 		}
 	}
@@ -241,17 +252,17 @@ double fx(double x)
 	return sin(-x) + exp(-x) - pow(x, 3);
 }
 
-void Approximation(std::vector<func> f, func function)
+double* Approximation(vector<func> f, func function)
 {
-	double** AB = new double* [5];
+	double** A = new double* [5];
 	for (int i = 0; i < 5; ++i)
-		AB[i] = new double[5];
+		A[i] = new double[5];
 
 	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
-			AB[i][j] = DotProduct(0.00001, make_pair(-1, 1), f[j], f[i]);
+			A[i][j] = DotProduct(0.00001, make_pair(-1, 1), f[j], f[i]);
 		}
 	}
 
@@ -262,21 +273,29 @@ void Approximation(std::vector<func> f, func function)
 		B[i] = DotProduct(0.00001, make_pair(-1, 1), function, f[i]);
 	}
 
-	double* X = ElimGauss(AB, B, 5);
+	return ElimGauss(A, B, 5);
+}
+
+double* ApproximationCustomBase(vector<vector<double>> base, func function)
+{
+	double** A = new double* [5];
+	for (int i = 0; i < 5; ++i)
+		A[i] = new double[5];
 
 	for (int i = 0; i < 5; i++)
 	{
-		std::cout << X[i] << std::endl;
+		for (int j = 0; j < 5; j++)
+		{
+			A[i][j] = DotProduct(0.00001, make_pair(-1, 1), base[j], base[i]);
+		}
 	}
-}
 
-void runable() {
-	vector<func> base;
-	base.push_back([](double x) {return 1.0; });
-	base.push_back([](double x) { return x; });
-	base.push_back([](double x) { return pow(x, 2); });
-	base.push_back([](double x) { return pow(x, 3); });
-	base.push_back([](double x) { return pow(x, 4); });
+	auto B = new double[5];
 
-	Approximation(base, fx);
+	for (int i = 0; i < 5; i++)
+	{
+		B[i] = DotProduct(0.00001, make_pair(-1, 1), function, base[i]);
+	}
+ 
+	return ElimGauss(A, B, 5);
 }

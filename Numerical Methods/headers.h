@@ -66,5 +66,6 @@ std::vector<std::vector<double>> ThreePartRule(std::pair<double, double> g, int 
 void ScalarTest(double h, std::pair<double, double> g, std::vector<std::vector<double>> baza, func* ftab);
 void PrintBase(std::vector<std::vector<double>> base);
 
-
-void runable();
+double fx(double x);
+double* Approximation(std::vector<func> f, func function);
+double* ApproximationCustomBase(std::vector<std::vector<double>> base, func function);
