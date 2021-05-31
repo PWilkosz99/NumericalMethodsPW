@@ -68,12 +68,27 @@ void PrintZeros(vector<double> zrs)
 	}
 }
 
+double DerivativeByDefinition(func f, double x, double h) {
+	return (f(x + h) - f(x)) / h;
+}
+
 double NewtonRaphsonSingle(func f, func df, double x)
 {
 	double h = f(x) / df(x);
 	while (abs(h) >= EPSILON)
 	{
 		h = f(x) / df(x);
+		x = x - h;
+	}
+	return x;
+}
+
+double NewtonRaphsonSingleWithDerivative(func f, double x)
+{
+	double h = f(x) / DerivativeByDefinition(f, x, 0.001);
+	while (abs(h) >= EPSILON)
+	{
+		h = f(x) / DerivativeByDefinition(f, x, 0.001);
 		x = x - h;
 	}
 	return x;
@@ -90,6 +105,34 @@ vector<double> NewtonRaphson(func f, func df, double x)
 	while (iter < MAXITER)
 	{
 		h = f(x) / df(x);
+		x = x - h;
+
+		if (abs(h) <= EPSILON) {
+			if (!CheckIfThisResultExist(x, res)) {
+				res.push_back(x);
+				EXTtimes = 0;
+			}
+			else {
+				x += EXT * EXTtimes;
+				EXTtimes++;
+			}
+		}
+		iter++;
+	}
+	return res;
+}
+
+vector<double> NewtonRaphsonWithDerivative(func f, double x)
+{
+	double EXT = 0.1;
+	int EXTtimes = 0;
+
+	vector<double> res;
+	int iter = 0;
+	double h = f(x) / DerivativeByDefinition(f, x, 0.001);
+	while (iter < MAXITER)
+	{
+		h = f(x) / DerivativeByDefinition(f, x, 0.001);
 		x = x - h;
 
 		if (abs(h) <= EPSILON) {
@@ -143,20 +186,20 @@ double RegulaFalsi(func f, double x1, double x2)
 	double x0;
 	if (f(x1) * f(x2) >= 0)
 	{
-		cout << "Funkcja przyjmuje te same znaki\n"; //Z zalozen reguly falsi wynika ze funkcja na krañcach przedzia³u [a,b] musi przyjmowac rozne znaki
+		cout << "BLAD: Liczby tych samych zakow jakos krance przedzialow\n"; //Z zalozen reguly falsi wynika ze funkcja na krañcach przedzia³u [a,b] musi przyjmowac rozne znaki
 		throw "Zly przedzial dla reguly Falsi";
 	}
-	else 
+	else
 	{
 		for (int i = 0; i < MAXITER; i++)
 		{
 			x0 = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
 
-			if (f(x0) == 0)
+			if (f(x0) == 0.0)
 			{
 				break;
 			}
-			else if (f(x0) * f(x1) < 0)
+			else if (f(x0) * f(x1) < 0.0)
 			{
 				x2 = x0;
 			}
@@ -169,10 +212,42 @@ double RegulaFalsi(func f, double x1, double x2)
 	return x0;
 }
 
+double BisectionMethod(func f, double x1, double x2)
+{
+	double x0;
+	if (f(x1) * f(x2) >= 0)
+	{
+		cout << "BLAD: Liczby tych samych zakow jakos krance przedzialow\n"; //Z zalozen reguly falsi wynika ze funkcja na krañcach przedzia³u [a,b] musi przyjmowac rozne znaki
+		throw "Zly przedzial dla reguly metody bisekcji";
+	}
+	else
+	{
+		while ((x2 - x1) >= EPSILON)
+		{
+			x0 = (x1 + x2) / 2.0;
+			if (f(x0) == 0.0)
+			{
+				break;
+			}
+			else if (f(x0) * f(x1) < 0.0)
+			{
+				x2 = x0;
+			}
+			else
+			{
+				x2 = x0;
+			}
+		}
+	}
+	return x0;
+}
+
 void runable() {
 	//PrintZeros(NewtonRaphson(f1, df1, -10));
 	//cout<<SecantMethod(f1, -100, 120);
-	cout<<RegulaFalsi(f1, -2, 5);
+	//cout<<RegulaFalsi(f1, -2, 5);
+	//cout << BisectionMethod(f1, -2, 2);
+	PrintZeros(NewtonRaphsonWithDerivative(f1, -10));
 }
 
 //1
