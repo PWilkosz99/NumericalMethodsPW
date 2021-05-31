@@ -8,11 +8,11 @@ using namespace std;
 
 typedef double(*func)(double);
 
-double f4(double x) {
+double f4i(double x) {
 	return x * x * pow(sin(x), 3);
 }
 
-double f5(double x) {
+double f5i(double x) {
 	return exp(x * x) * (x - 1);
 }
 

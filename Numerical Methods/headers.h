@@ -69,3 +69,4 @@ void PrintBase(std::vector<std::vector<double>> base);
 double fx(double x);
 double* Approximation(std::vector<func> f, func function);
 double* ApproximationCustomBase(std::vector<std::vector<double>> base, func function);
+void runable();
