@@ -63,6 +63,17 @@ void PrintZeros(vector<double> zrs) {
 	}
 }
 
+double NewtonRaphsonSingle(func f, func df, double x)
+{
+	double h = f(x) / df(x);
+	while (abs(h) >= EPSILON)
+	{
+		h = f(x) / df(x);
+		x = x - h;
+	}
+	return x;
+}
+
 vector<double> NewtonRaphson(func f, func df, double x)
 {
 	double EXT = 0.1;
@@ -91,9 +102,42 @@ vector<double> NewtonRaphson(func f, func df, double x)
 	return res;
 }
 
-void runable() {
-	PrintZeros(NewtonRaphson(f1, df1, -10));
+double SecantMethod(func f, double x1, double x2)
+{
+	double xm;
+	double fk;
+	double x0;
+	if (f(x1) * f(x2) < 0) {
+		do {
+			x0 = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
+			fk = f(x1) * f(x0);
+
+			x1 = x2;
+			x2 = x0;
+
+			if (fk == 0)
+			{
+				break;
+			}
+			else 
+			{
+				xm = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
+			}
+		} while (fabs(xm - x0) >= EPSILON);
+		return x0;
+	}
+	else 
+	{
+		cout << "Brak rozwiazan dla przedzialu" << "[" << x1 << "]" << "\n";
+		throw "Brak rozwiazan";
+	}
 }
+
+void runable() {
+	//PrintZeros(NewtonRaphson(f1, df1, -10));
+	cout<<SecantMethod(f1, -100, 120);
+}
+
 //1
 //- 1.73205
 //- 1
