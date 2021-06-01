@@ -241,24 +241,3 @@ double BisectionMethod(func f, double x1, double x2)
 	}
 	return x0;
 }
-
-void runable() {
-	//PrintZeros(NewtonRaphson(f1, df1, -10));
-	//cout<<SecantMethod(f1, -100, 120);
-	//cout<<RegulaFalsi(f1, -2, 5);
-	//cout << BisectionMethod(f1, -2, 2);
-	PrintZeros(NewtonRaphsonWithDerivative(f1, -10));
-}
-
-//1
-//- 1.73205
-//- 1
-//1.73205
-//2
-//-1.41421
-//1.41421
-//3
-//0.000133735
-//4
-//-1.22364
-//1.22364

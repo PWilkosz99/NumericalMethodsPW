@@ -69,4 +69,24 @@ void PrintBase(std::vector<std::vector<double>> base);
 double fx(double x);
 double* Approximation(std::vector<func> f, func function);
 double* ApproximationCustomBase(std::vector<std::vector<double>> base, func function);
+
+void PrintZeros(std::vector<double> zrs);
+double DerivativeByDefinition(func f, double x, double h);
+double NewtonRaphsonSingle(func f, func df, double x);
+double NewtonRaphsonSingleWithDerivative(func f, double x);
+std::vector<double> NewtonRaphson(func f, func df, double x);
+std::vector<double> NewtonRaphsonWithDerivative(func f, double x);
+double SecantMethod(func f, double x1, double x2);
+double RegulaFalsi(func f, double x1, double x2);
+double BisectionMethod(func f, double x1, double x2);
+
+double f1(double x);
+double f2(double x);
+double f3(double x);
+double f4(double x);
+double df1(double x);
+double df2(double x);
+double df3(double x);
+double df4(double x);
+
 void runable();
