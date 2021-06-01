@@ -155,7 +155,7 @@ double SecantMethod(func f, double x1, double x2)
 	double xm;
 	double fk;
 	double x0;
-	if (f(x1) * f(x2) < 0) {
+	if (f(x1) * f(x2) < 0.0) {
 		do {
 			x0 = (x1 * f(x2) - x2 * f(x1)) / (f(x2) - f(x1));
 			fk = f(x1) * f(x0);
@@ -176,7 +176,7 @@ double SecantMethod(func f, double x1, double x2)
 	}
 	else
 	{
-		cout << "Brak rozwiazan dla przedzialu" << "[" << x1 << "]" << "\n";
+		cout << "Brak rozwiazan dla przedzialu" << "[" << x1 << " , " << x2 << "]" << "\n";
 		throw "Brak rozwiazan";
 	}
 }
@@ -184,9 +184,9 @@ double SecantMethod(func f, double x1, double x2)
 double RegulaFalsi(func f, double x1, double x2)
 {
 	double x0;
-	if (f(x1) * f(x2) >= 0)
+	if (f(x1) * f(x2) >= 0.0)
 	{
-		cout << "BLAD: Liczby tych samych zakow jakos krance przedzialow\n"; //Z zalozen reguly falsi wynika ze funkcja na krañcach przedzia³u [a,b] musi przyjmowac rozne znaki
+		cout << "BLAD: Wartosci tych samych zakow jako krance przedzialow\n"; //Z zalozen reguly falsi wynika ze funkcja na krañcach przedzia³u [a,b] musi przyjmowac rozne znaki
 		throw "Zly przedzial dla reguly Falsi";
 	}
 	else
@@ -235,7 +235,7 @@ double BisectionMethod(func f, double x1, double x2)
 			}
 			else
 			{
-				x2 = x0;
+				x1 = x0;
 			}
 		}
 	}
