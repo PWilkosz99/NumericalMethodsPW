@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="approximation.cpp" />
+    <ClCompile Include="differentialeq.cpp" />
     <ClCompile Include="horner.cpp" />
     <ClCompile Include="integration.cpp" />
     <ClCompile Include="interpolations.cpp" />
