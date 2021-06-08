@@ -89,4 +89,9 @@ double df2(double x);
 double df3(double x);
 double df4(double x);
 
-void runable();
+typedef double(*funcTherm)(double, double, double);
+double ThermalConductivityEQ(double alpha, double beta, double T);
+double EulerMethod(int n, double xs, double xf, double ys, funcTherm f, double alpha, double beta);
+double HeunMethod(int n, double xs, double xf, double ys, funcTherm f, double alpha, double beta);
+double ModifiedEulerMethod(int n, double xs, double xf, double ys, funcTherm f, double alpha, double beta);
+double RungeKutta4(int n, double xs, double xf, double ys, funcTherm f, double alpha, double beta);
