@@ -18,8 +18,7 @@ double EulerMethod(int n, double xs, double xf, double ys, funcTherm f, double a
 	{
 		res += h * f(alpha, beta, res);
 #ifdef SHOWSTEPS
-		//cout << "[" << i << "] " << res << "\n";
-		cout << res << "\n";
+		cout << "[" << i << "] " << res << "\n";
 #endif
 
 	}
@@ -36,8 +35,7 @@ double HeunMethod(int n, double xs, double xf, double ys, funcTherm f, double al
 		res += 0.5 * h * (f(alpha, beta, y0) + f(alpha, beta, y0 + h * f(alpha, beta, y0)));
 		y0 = res;
 #ifdef SHOWSTEPS
-		//cout << "[" << i << "] " << res << "\n";
-		cout << res << "\n";
+		cout << "[" << i << "] " << res << "\n";
 #endif
 	}
 	return res;
@@ -53,8 +51,7 @@ double ModifiedEulerMethod(int n, double xs, double xf, double ys, funcTherm f, 
 		res += h * (f(alpha, beta, y0 + 0.5 * h * f(alpha, beta, y0)));
 		y0 = res;
 #ifdef SHOWSTEPS
-		//cout << "[" << i << "] " << res << "\n";
-		cout << res << "\n";
+		cout << "[" << i << "] " << res << "\n";
 #endif
 	}
 	return res;
@@ -74,8 +71,7 @@ double RungeKutta4(int n, double xs, double xf, double ys, funcTherm f, double a
 
 		res = res + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4);
 #ifdef SHOWSTEPS
-		//cout << "[" << i << "] " << res << "\n";
-		cout << res << "\n";
+		cout << "[" << i << "] " << res << "\n";
 #endif
 	}
 	return res;
